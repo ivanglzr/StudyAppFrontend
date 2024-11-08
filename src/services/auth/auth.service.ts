@@ -25,7 +25,7 @@ export async function logIn(loginData: ILogIn) {
       ?.split(";")[0]
       .split("=")[1];
 
-    if (!accessToken) throw new UnauthorizedError("");
+    if (!accessToken) throw new UnauthorizedError();
 
     const res: IResponse | IBadResponse = await petition.json();
 
