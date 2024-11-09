@@ -17,8 +17,6 @@ export async function getAccessToken() {
 
   const accessToken = cookieStore.get(accessTokenCookieName)?.value;
 
-  if (!accessToken) redirect("/login");
-
   return accessToken;
 }
 
@@ -35,4 +33,12 @@ export async function setAccessToken(accessToken: string) {
     value: accessToken,
     ...cookieOptions,
   });
+}
+
+export async function clearAccessToken() {
+  const cookieStore = await cookies();
+
+  cookieStore.delete(accessTokenCookieName);
+
+  redirect("/login");
 }
