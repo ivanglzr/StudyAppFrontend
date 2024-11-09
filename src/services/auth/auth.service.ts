@@ -1,12 +1,12 @@
 "use server";
 
+import { redirect } from "next/navigation";
+
 import { IResponse, IBadResponse } from "@/interfaces/response.interfaces";
 import { ILogIn } from "@/interfaces/auth.interfaces";
 
 import { handleErrors, validateResponse } from "../utils";
-import { setAccessToken } from "../cookies";
-
-import { UnauthorizedError } from "@/errors/auth.errors";
+import { clearAccessToken, setAccessToken } from "../cookies";
 
 import { AUTH_ROUTES } from "./auth.routes";
 
@@ -25,9 +25,9 @@ export async function logIn(loginData: ILogIn) {
       ?.split(";")[0]
       .split("=")[1];
 
-    if (!accessToken) throw new UnauthorizedError();
-
     const res: IResponse | IBadResponse = await petition.json();
+
+    if (!accessToken) return res.message;
 
     validateResponse(res);
 
@@ -37,4 +37,10 @@ export async function logIn(loginData: ILogIn) {
   } catch (error) {
     await handleErrors(error);
   }
+}
+
+export async function logOut() {
+  await clearAccessToken();
+
+  redirect("/login");
 }
