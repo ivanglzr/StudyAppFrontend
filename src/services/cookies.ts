@@ -4,9 +4,7 @@ import { redirect } from "next/navigation";
 
 import { cookies } from "next/headers";
 
-import { cookieOptions } from "./auth/auth.config";
-
-const accessTokenCookieName = "access_token";
+import { cookieOptions, accessTokenCookieName } from "./auth/auth.config";
 
 /**
  * Use this function to get the access token
