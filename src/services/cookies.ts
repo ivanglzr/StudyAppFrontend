@@ -8,12 +8,15 @@ import { cookieOptions, accessTokenCookieName } from "./auth/auth.config";
 
 /**
  * Use this function to get the access token
+ * @param redirectToLogin If you want a redirection in case of error put this param to true
  * @returns The access token stored in a cookie
  */
-export async function getAccessToken() {
+export async function getAccessToken(redirectToLogin = false) {
   const cookieStore = await cookies();
 
   const accessToken = cookieStore.get(accessTokenCookieName)?.value;
+
+  if (!accessToken && redirectToLogin) redirect("/login");
 
   return accessToken;
 }
