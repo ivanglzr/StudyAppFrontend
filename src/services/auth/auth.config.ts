@@ -6,5 +6,5 @@ export const cookieOptions: Partial<ResponseCookie> = {
   secure: true,
   httpOnly: true,
   sameSite: "lax",
-  expires: 1000 * 60 * 1000,
+  expires: new Date(Date.now() + 1000 * 60),
 };
