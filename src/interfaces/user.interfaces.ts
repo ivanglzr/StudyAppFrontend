@@ -8,3 +8,8 @@ export interface IUser {
 export interface IGetUserResponse extends IResponse {
   user: IUser;
 }
+
+export interface IChangePassword {
+  password: string;
+  newPassword: string;
+}
