@@ -2,17 +2,16 @@
 
 import { useCallback, useRef, useState } from "react";
 import { useValidationErrors } from "@/hooks/useValidationErrors";
+import { useAlertMessageStore } from "@/store/alertMessage";
 
 import { Form } from "./Form";
 import { FormGroup } from "./FormGroup";
-import { Button } from "@/components/ui/button";
 
 import { register } from "@/services/auth/auth.service";
 
 import { validateRegisterSchema } from "@/lib/validation";
 
 import { IRegister } from "@/interfaces/auth.interfaces";
-import { useAlertMessageStore } from "@/store/alertMessage";
 
 export function RegisterForm() {
   const showAlert = useAlertMessageStore((state) => state.showAlert);
@@ -61,7 +60,13 @@ export function RegisterForm() {
   };
 
   return (
-    <Form title="Register" handleSubmit={handleSubmit}>
+    <Form
+      title="Register"
+      buttonText="Register"
+      linkText="Already have an account? Log in"
+      linkHref="login"
+      handleSubmit={handleSubmit}
+    >
       <FormGroup
         type="text"
         inputName="fullname"
@@ -89,9 +94,6 @@ export function RegisterForm() {
         value={registerData.password}
         errorMessage={errorMessages.password}
       />
-      <Button type="submit" className="my-4 text-xl">
-        Register
-      </Button>
     </Form>
   );
 }

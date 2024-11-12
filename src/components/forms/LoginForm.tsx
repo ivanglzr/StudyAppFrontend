@@ -6,7 +6,6 @@ import { useAlertMessageStore } from "@/store/alertMessage";
 
 import { Form } from "./Form";
 import { FormGroup } from "./FormGroup";
-import { Button } from "@/components/ui/button";
 
 import { logIn } from "@/services/auth/auth.service";
 
@@ -59,7 +58,13 @@ export function LoginForm() {
   };
 
   return (
-    <Form title="Log In" handleSubmit={handleSubmit}>
+    <Form
+      title="Log In"
+      buttonText="Log in"
+      linkText="Don't have an account? Register"
+      linkHref="register"
+      handleSubmit={handleSubmit}
+    >
       <FormGroup
         type="email"
         inputName="email"
@@ -78,9 +83,6 @@ export function LoginForm() {
         value={loginData.password}
         errorMessage={errorMessages.password}
       />
-      <Button type="submit" className="my-4 text-xl">
-        Log In
-      </Button>
     </Form>
   );
 }
