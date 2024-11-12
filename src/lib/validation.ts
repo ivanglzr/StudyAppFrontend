@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { ILogIn } from "@/interfaces/auth.interfaces";
+import { ILogIn, IRegister } from "@/interfaces/auth.interfaces";
 
 export type ErrorMessagesForInterface<T extends object> = {
   [K in keyof T]: string | null;
@@ -8,6 +8,15 @@ export type ErrorMessagesForInterface<T extends object> = {
 
 const passwordRegex =
   /^(?=(.*[A-Z]){2,})(?=(.*[a-z]){2,})(?=(.*\d){1,})(?=(.*[!@#$%^&*()_\-+=[\]{};':"\\|,.<>/?]){1,}).{8,}$/;
+
+const fullnameSchema = z
+  .string({
+    required_error: "Fullname is required",
+    invalid_type_error: "Fullname must be an string",
+  })
+  .min(1, "Fullname can't be empty")
+  .min(2, "Fullname must be atleast 2 characters long")
+  .max(50, "Fullname can't have more than 50 characters");
 
 const emailSchema = z
   .string({
@@ -37,5 +46,14 @@ const logInSchema = z.object({
   password: passwordSchema,
 });
 
+const registerSchema = z.object({
+  fullname: fullnameSchema,
+  email: emailSchema,
+  password: passwordSchema,
+});
+
 export const validateLogInSchema = (loginData: ILogIn) =>
   logInSchema.safeParse(loginData);
+
+export const validateRegisterSchema = (registerData: IRegister) =>
+  registerSchema.safeParse(registerData);
