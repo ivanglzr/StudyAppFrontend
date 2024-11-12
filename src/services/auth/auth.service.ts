@@ -43,7 +43,9 @@ export async function logIn(loginData: ILogIn) {
 
     await setAccessToken(accessToken);
 
-    redirect("/");
+    if (res.statusCode === 200) redirect("/");
+
+    return res.message;
   } catch (error) {
     await handleErrors(error);
 
@@ -63,7 +65,7 @@ export async function register(
       body: JSON.stringify(registerData),
     });
 
-    const res = await petition.json();
+    const res: IResponse | IBadResponse = await petition.json();
 
     const accessToken = extractAccessTokenFromHeaders(petition.headers);
 
@@ -73,7 +75,9 @@ export async function register(
 
     await setAccessToken(accessToken);
 
-    redirect("/");
+    if (res.statusCode === 200) redirect("/");
+
+    return res.message;
   } catch (error) {
     await handleErrors(error);
 
