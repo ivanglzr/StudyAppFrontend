@@ -51,7 +51,9 @@ export async function logIn(loginData: ILogIn) {
   }
 }
 
-export async function register(registerData: IRegister) {
+export async function register(
+  registerData: IRegister
+): Promise<string | void> {
   try {
     const petition = await fetch(AUTH_ROUTES.REGISTER, {
       method: "POST",
