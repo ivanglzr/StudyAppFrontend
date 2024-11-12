@@ -2,6 +2,10 @@ import { z } from "zod";
 
 import { ILogIn } from "@/interfaces/auth.interfaces";
 
+export type ErrorMessagesForInterface<T extends object> = {
+  [K in keyof T]: string | null;
+};
+
 const passwordRegex =
   /^(?=(.*[A-Z]){2,})(?=(.*[a-z]){2,})(?=(.*\d){1,})(?=(.*[!@#$%^&*()_\-+=[\]{};':"\\|,.<>/?]){1,}).{8,}$/;
 
