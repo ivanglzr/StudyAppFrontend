@@ -75,7 +75,7 @@ export async function register(
 
     await setAccessToken(accessToken);
 
-    if (res.statusCode === 200) redirect("/");
+    if (res.statusCode === 201) redirect("/");
 
     return res.message;
   } catch (error) {
