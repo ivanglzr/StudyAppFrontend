@@ -12,8 +12,11 @@ import { register } from "@/services/auth/auth.service";
 import { validateRegisterSchema } from "@/lib/validation";
 
 import { IRegister } from "@/interfaces/auth.interfaces";
+import { useAlertMessageStore } from "@/store/alertMessage";
 
 export function RegisterForm() {
+  const showAlert = useAlertMessageStore((state) => state.showAlert);
+
   const [registerData, setRegisterData] = useState<IRegister>({
     email: "",
     password: "",
@@ -40,9 +43,12 @@ export function RegisterForm() {
         return;
       }
 
-      await register(data);
+      const message = await register(data);
+
+      if (message)
+        showAlert({ title: "Error", message, variant: "destructive" });
     },
-    [setErrorMessages]
+    [setErrorMessages, showAlert]
   );
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

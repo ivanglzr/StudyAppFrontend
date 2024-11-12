@@ -2,6 +2,7 @@
 
 import { useCallback, useRef, useState } from "react";
 import { useValidationErrors } from "@/hooks/useValidationErrors";
+import { useAlertMessageStore } from "@/store/alertMessage";
 
 import { Form } from "./Form";
 import { FormGroup } from "./FormGroup";
@@ -14,6 +15,8 @@ import { validateLogInSchema } from "@/lib/validation";
 import { ILogIn } from "@/interfaces/auth.interfaces";
 
 export function LoginForm() {
+  const showAlert = useAlertMessageStore((state) => state.showAlert);
+
   const [loginData, setLoginData] = useState<ILogIn>({
     email: "",
     password: "",
@@ -38,9 +41,12 @@ export function LoginForm() {
         return;
       }
 
-      await logIn(data);
+      const message = await logIn(data);
+
+      if (message)
+        showAlert({ title: "Error", message, variant: "destructive" });
     },
-    [setErrorMessages]
+    [setErrorMessages, showAlert]
   );
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
