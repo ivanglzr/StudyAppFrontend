@@ -1,6 +1,7 @@
 "use server";
 
 import { redirect } from "next/navigation";
+import { isRedirectError } from "next/dist/client/components/redirect";
 
 import { IResponse, IBadResponse } from "@/interfaces/response.interfaces";
 import { ILogIn, IRegister } from "@/interfaces/auth.interfaces";
@@ -42,9 +43,11 @@ export async function logIn(loginData: ILogIn) {
 
     await setAccessToken(accessToken);
 
-    return res.message;
+    redirect("/");
   } catch (error) {
     await handleErrors(error);
+
+    if (isRedirectError(error)) redirect("/");
   }
 }
 
@@ -68,9 +71,11 @@ export async function register(registerData: IRegister) {
 
     await setAccessToken(accessToken);
 
-    return res.message;
+    redirect("/");
   } catch (error) {
     await handleErrors(error);
+
+    if (isRedirectError(error)) redirect("/");
   }
 }
 
