@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 
-import { UnauthorizedError } from "@/errors/auth.errors";
+import { UnauthorizedError } from "@/errors/auth/unauthorized.error";
 
 import { IBadResponse, IResponse } from "@/interfaces/response.interfaces";
 import { accessTokenCookieName } from "./auth/auth.config";
