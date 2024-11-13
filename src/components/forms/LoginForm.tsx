@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useRef, useState } from "react";
-import { useValidationErrors } from "@/hooks/useValidationErrors";
+import { useValidationErrors } from "@/hooks/useValidationErrors.hook";
 import { useAlertMessageStore } from "@/store/alertMessage.store";
 
 import { Form } from "./Form";
