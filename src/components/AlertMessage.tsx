@@ -4,7 +4,7 @@ import { Info, AlertCircle, X } from "lucide-react";
 
 import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
 
-import { useAlertMessageStore } from "@/store/alertMessage";
+import { useAlertMessageStore } from "@/store/alertMessage.store";
 
 import { centerAbsolute } from "@/css/styles";
 

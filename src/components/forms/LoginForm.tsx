@@ -2,7 +2,7 @@
 
 import { useCallback, useRef, useState } from "react";
 import { useValidationErrors } from "@/hooks/useValidationErrors";
-import { useAlertMessageStore } from "@/store/alertMessage";
+import { useAlertMessageStore } from "@/store/alertMessage.store";
 
 import { Form } from "./Form";
 import { FormGroup } from "./FormGroup";
