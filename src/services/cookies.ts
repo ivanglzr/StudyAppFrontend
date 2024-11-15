@@ -7,9 +7,9 @@ import { cookies } from "next/headers";
 import { cookieOptions, accessTokenCookieName } from "./auth/auth.config";
 
 /**
- * Use this function to get the access token
- * @param redirectToLogin If you want a redirection in case of error put this param to true
- * @returns The access token stored in a cookie
+ * Use this function to get the access token.
+ * @param redirectToLogin If you want a redirection in case of error put this param to true.
+ * @returns The access token stored in a cookie.
  */
 export async function getAccessToken(redirectToLogin = false) {
   const cookieStore = await cookies();
@@ -22,9 +22,10 @@ export async function getAccessToken(redirectToLogin = false) {
 }
 
 /**
- * Function to set the access token
- * ! Use this function along with await to avoid an UnhandledRejection
- * @param accessToken JWT key that the server returned
+ * Function to set the access token.
+ *
+ * ⚠ Use this function along with await to avoid an UnhandledRejection.
+ * @param accessToken JWT key that the server returned.
  */
 export async function setAccessToken(accessToken: string) {
   const cookieStore = await cookies();
@@ -36,6 +37,11 @@ export async function setAccessToken(accessToken: string) {
   });
 }
 
+/**
+ * Function to delete the access token cookie.
+ *
+ * It also redirects the user to the login page.
+ */
 export async function clearAccessToken() {
   const cookieStore = await cookies();
 
