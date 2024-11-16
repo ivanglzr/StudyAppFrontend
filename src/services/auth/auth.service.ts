@@ -11,7 +11,7 @@ import { clearAccessToken, setAccessToken } from "../cookies";
 
 import { AUTH_ROUTES } from "./auth.routes";
 
-import { accessTokenCookieName } from "./auth.config";
+import { accessTokenCookieName } from "@/config";
 
 function extractAccessTokenFromHeaders(headers: Headers) {
   const accessToken = headers

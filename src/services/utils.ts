@@ -3,7 +3,8 @@ import { redirect } from "next/navigation";
 import { UnauthorizedError } from "@/errors/auth/unauthorized.error";
 
 import { IBadResponse, IResponse } from "@/interfaces/response.interfaces";
-import { accessTokenCookieName } from "./auth/auth.config";
+
+import { accessTokenCookieName } from "@/config";
 
 export function validateResponse(res: IResponse | IBadResponse) {
   if (res.statusCode === 401) throw new UnauthorizedError(res.message);
