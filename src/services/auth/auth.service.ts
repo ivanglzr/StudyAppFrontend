@@ -1,7 +1,6 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { isRedirectError } from "next/dist/client/components/redirect";
 
 import { IResponse, IBadResponse } from "@/interfaces/response.interfaces";
 import { ILogIn, IRegister } from "@/interfaces/auth.interfaces";
@@ -11,7 +10,7 @@ import { clearAccessToken, setAccessToken } from "../cookies";
 
 import { AUTH_ROUTES } from "./auth.routes";
 
-import { accessTokenCookieName } from "@/config";
+import { accessTokenCookieName, ROUTES } from "@/config";
 
 function extractAccessTokenFromHeaders(headers: Headers) {
   const accessToken = headers
@@ -43,13 +42,11 @@ export async function logIn(loginData: ILogIn) {
 
     await setAccessToken(accessToken);
 
-    if (res.statusCode === 200) redirect("/");
+    if (res.statusCode === 200) redirect("");
 
     return res.message;
   } catch (error) {
-    await handleErrors(error);
-
-    if (isRedirectError(error)) redirect("/");
+    await handleErrors(error, ROUTES.HOME);
   }
 }
 
@@ -75,13 +72,11 @@ export async function register(
 
     await setAccessToken(accessToken);
 
-    if (res.statusCode === 201) redirect("/");
+    if (res.statusCode === 201) redirect("");
 
     return res.message;
   } catch (error) {
-    await handleErrors(error);
-
-    if (isRedirectError(error)) redirect("/");
+    await handleErrors(error, ROUTES.HOME);
   }
 }
 
