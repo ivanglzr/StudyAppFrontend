@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("./themes.css");
+
 * {
   margin: 0;
   padding: 0;
@@ -70,5 +72,6 @@
   }
   body {
     @apply bg-background text-foreground;
+    transition: background-color 0.3s, color 0.3s;
   }
 }
