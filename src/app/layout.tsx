@@ -4,6 +4,7 @@ import { poppins } from "@/css/fonts";
 import type { Metadata } from "next";
 
 import { AlertMessage } from "@/components/AlertMessage";
+import { ThemeManager } from "@/components/ThemeManager";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,6 +21,7 @@ export default function RootLayout({
       <body className={poppins.className}>
         {children}
         <AlertMessage />
+        <ThemeManager />
       </body>
     </html>
   );
