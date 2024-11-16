@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 
 import { cookies } from "next/headers";
 
-import { accessTokenCookieName } from "@/config";
+import { accessTokenCookieName, ROUTES } from "@/config";
 import { cookieOptions } from "./auth/auth.config";
 
 /**
@@ -17,7 +17,7 @@ export async function getAccessToken(redirectToLogin = false) {
 
   const accessToken = cookieStore.get(accessTokenCookieName)?.value;
 
-  if (!accessToken && redirectToLogin) redirect("/login");
+  if (!accessToken && redirectToLogin) redirect(ROUTES.LOG_IN);
 
   return accessToken;
 }
@@ -43,10 +43,10 @@ export async function setAccessToken(accessToken: string) {
  *
  * It also redirects the user to the login page.
  */
-export async function clearAccessToken() {
+export async function clearAccessToken(): Promise<never> {
   const cookieStore = await cookies();
 
   cookieStore.delete(accessTokenCookieName);
 
-  redirect("/login");
+  redirect(ROUTES.LOG_IN);
 }

@@ -13,6 +13,8 @@ import { validateRegisterSchema } from "@/lib/validation";
 
 import { IRegister } from "@/interfaces/auth.interfaces";
 
+import { ROUTES } from "@/config";
+
 export function RegisterForm() {
   const showAlert = useAlertMessageStore((state) => state.showAlert);
 
@@ -64,7 +66,7 @@ export function RegisterForm() {
       title="Register"
       buttonText="Register"
       linkText="Already have an account? Log in"
-      linkHref="login"
+      linkHref={ROUTES.LOG_IN}
       handleSubmit={handleSubmit}
     >
       <FormGroup

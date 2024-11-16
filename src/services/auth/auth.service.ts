@@ -82,6 +82,4 @@ export async function register(
 
 export async function logOut() {
   await clearAccessToken();
-
-  redirect("/login");
 }
