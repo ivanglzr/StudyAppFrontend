@@ -3,11 +3,11 @@
 import { create } from "zustand";
 
 export const themeColors = ["blue", "green", "purple"] as const;
-export type themeColorsType = (typeof themeColors)[number];
+export type ThemeColors = (typeof themeColors)[number];
 
 interface Theme {
   darkMode: boolean;
-  colorTheme: themeColorsType | undefined;
+  colorTheme: ThemeColors | undefined;
 }
 
 interface Props {
@@ -24,9 +24,13 @@ function getThemeFromLocalStorage() {
 
   if (!theme) return undefined;
 
-  const parsedTheme = JSON.parse(theme) as Theme;
+  try {
+    const parsedTheme = JSON.parse(theme) as Theme;
 
-  return parsedTheme;
+    return parsedTheme;
+  } catch {
+    return undefined;
+  }
 }
 
 function setInitialTheme() {
@@ -48,30 +52,56 @@ function saveThemeInLocalStorage(theme: Theme) {
   window.localStorage.setItem("theme", JSON.stringify(theme));
 }
 
+function toggleDarkMode(darkMode: boolean) {
+  document.body.classList.toggle("dark", darkMode);
+}
+
+function applyColorTheme(
+  prevColor: ThemeColors | undefined,
+  newColor: ThemeColors
+) {
+  if (themeColors.includes(newColor)) {
+    if (prevColor !== undefined)
+      document.body.classList.remove(`theme-${prevColor}`);
+
+    document.body.classList.add(`theme-${newColor}`);
+
+    return newColor;
+  } else {
+    document.body.classList.remove(`theme-${prevColor}`);
+
+    return undefined;
+  }
+}
+
 export const useThemeStore = create<Props & Actions>((set, get) => ({
   theme: {
-    darkMode: true,
+    darkMode: false,
     colorTheme: undefined,
   },
   setTheme: (newTheme: Partial<Theme>) => {
     const actualTheme = get().theme;
 
-    if (Object.hasOwn(newTheme, "darkMode") && newTheme.darkMode)
-      document.body.classList.add("dark");
-    else if (Object.hasOwn(newTheme, "darkMode") && !newTheme.darkMode)
-      document.body.classList.remove("dark");
+    const updatedTheme = {
+      ...actualTheme,
+      ...newTheme,
+    };
 
-    if (newTheme.colorTheme && newTheme.colorTheme !== actualTheme.colorTheme) {
-      document.body.classList.remove(`theme-${actualTheme.colorTheme}`);
+    const darkMode = newTheme.darkMode;
 
-      set({ theme: { ...actualTheme, ...newTheme } });
+    if (darkMode !== undefined) toggleDarkMode(darkMode);
 
-      document.body.classList.add(`theme-${newTheme.colorTheme}`);
+    const colorTheme = newTheme.colorTheme;
+
+    if (colorTheme !== undefined) {
+      const newColorTheme = applyColorTheme(actualTheme.colorTheme, colorTheme);
+
+      updatedTheme.colorTheme = newColorTheme;
     }
 
-    set({ theme: { ...actualTheme, ...newTheme } });
+    set({ theme: updatedTheme });
 
-    saveThemeInLocalStorage(get().theme);
+    saveThemeInLocalStorage(updatedTheme);
   },
   setInitialTheme: () => {
     const theme = setInitialTheme();
