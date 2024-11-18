@@ -12,6 +12,7 @@ export interface ISubject {
   exams: IExam[];
   documents: string[];
   color: string;
+  _id: string;
 }
 
 export interface IGetSubjectsResponse extends IResponse {
