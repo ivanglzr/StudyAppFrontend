@@ -7,6 +7,7 @@ import {
   ICreateSubject,
   IGetSubjectResponse,
   IGetSubjectsResponse,
+  IUpdateSubject,
 } from "@/interfaces/subject.interfaces";
 
 import { SUBJECT_ROUTES } from "./subject.routes";
@@ -59,6 +60,28 @@ export async function postSubject(subject: ICreateSubject) {
   try {
     const petition = await fetch(SUBJECT_ROUTES.POST_SUBJECT, {
       method: "POST",
+      headers: {
+        ...getCookieHeader(token),
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(subject),
+    });
+    const res = await petition.json();
+
+    validateResponse(res);
+
+    return res.message;
+  } catch (error) {
+    await handleErrors(error);
+  }
+}
+
+export async function putSubject(subjectId: string, subject: IUpdateSubject) {
+  const token = await getAccessToken({ redirectToLogin: true });
+
+  try {
+    const petition = await fetch(SUBJECT_ROUTES.PUT_SUBJECT(subjectId), {
+      method: "PUT",
       headers: {
         ...getCookieHeader(token),
         "Content-Type": "application/json",
