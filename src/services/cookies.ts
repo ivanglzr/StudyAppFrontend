@@ -7,12 +7,26 @@ import { cookies } from "next/headers";
 import { accessTokenCookieName, ROUTES } from "@/config";
 import { cookieOptions } from "./auth/auth.config";
 
+export async function getAccessToken({
+  redirectToLogin,
+}: {
+  redirectToLogin: true;
+}): Promise<string | never>;
+
+export async function getAccessToken({
+  redirectToLogin,
+}: {
+  redirectToLogin: false;
+}): Promise<string | undefined>;
+
 /**
  * Use this function to get the access token.
  * @param redirectToLogin If you want a redirection in case of error put this param to true.
  * @returns The access token stored in a cookie.
  */
-export async function getAccessToken(redirectToLogin = false) {
+export async function getAccessToken(
+  { redirectToLogin } = { redirectToLogin: false }
+): Promise<string | never | undefined> {
   const cookieStore = await cookies();
 
   const accessToken = cookieStore.get(accessTokenCookieName)?.value;

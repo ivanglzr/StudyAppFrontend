@@ -12,10 +12,7 @@ import { IResponse } from "@/interfaces/response.interfaces";
 import { USER_ROUTES } from "./user.routes";
 
 export async function getUser() {
-  const token = await getAccessToken(true);
-
-  //? Only to avoid typescript error
-  if (!token) return;
+  const token = await getAccessToken({ redirectToLogin: true });
 
   try {
     const petition = await fetch(USER_ROUTES.GET_USER, {
@@ -33,10 +30,7 @@ export async function getUser() {
 }
 
 export async function changeUserPassword(passwords: IChangePassword) {
-  const token = await getAccessToken(true);
-
-  //? Only to avoid typescript error
-  if (!token) return;
+  const token = await getAccessToken({ redirectToLogin: true });
 
   try {
     const petition = await fetch(USER_ROUTES.CHANGE_PASSWORD, {
