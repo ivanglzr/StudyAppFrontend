@@ -3,7 +3,10 @@
 import { getAccessToken } from "../cookies";
 import { getCookieHeader, handleErrors, validateResponse } from "../utils";
 
-import { IGetSubjectsResponse } from "@/interfaces/subject.interfaces";
+import {
+  IGetSubjectResponse,
+  IGetSubjectsResponse,
+} from "@/interfaces/subject.interfaces";
 
 import { SUBJECT_ROUTES } from "./subject.routes";
 
@@ -23,6 +26,27 @@ export async function getSubjects() {
     validateResponse(res);
 
     return res.subjects;
+  } catch (error) {
+    await handleErrors(error);
+  }
+}
+
+export async function getSubject(subjectId: string) {
+  const token = await getAccessToken({ redirectToLogin: true });
+
+  try {
+    const petition = await fetch(SUBJECT_ROUTES.GET_SUBJECT(subjectId), {
+      method: "GET",
+      headers: {
+        ...getCookieHeader(token),
+        "Content-Type": "application/json",
+      },
+    });
+    const res: IGetSubjectResponse = await petition.json();
+
+    validateResponse(res);
+
+    return res.subject;
   } catch (error) {
     await handleErrors(error);
   }
