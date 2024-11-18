@@ -13,7 +13,9 @@ export function LogOutButton() {
       <div className="rounded-lg">
         <LogOut size={30} strokeWidth={1.5} color="hsl(var(--primary))" />
       </div>
-      <span className="text-primary text-sm opacity-90">Log Out</span>
+      <span className="text-primary text-sm whitespace-nowrap opacity-90">
+        Log Out
+      </span>
     </button>
   );
 }

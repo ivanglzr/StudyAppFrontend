@@ -32,9 +32,9 @@ export function SideBar() {
 
   return (
     <aside className="bg-muted">
-      <ul className="h-full flex flex-col items-center mt-2">
+      <ul className="h-full flex flex-col items-center mt-1">
         {links.map(({ text, icon, href }) => (
-          <li key={text}>
+          <li key={text} className="w-full px-2 mt-1">
             <LinkIcon
               icon={icon}
               href={href}
@@ -43,7 +43,7 @@ export function SideBar() {
             />
           </li>
         ))}
-        <li className="mt-auto mb-6">
+        <li className="w-full mt-auto mb-6 px-2">
           <LogOutButton />
         </li>
       </ul>
