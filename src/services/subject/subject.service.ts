@@ -97,3 +97,24 @@ export async function putSubject(subjectId: string, subject: IUpdateSubject) {
     await handleErrors(error);
   }
 }
+
+export async function deleteSubject(subjectId: string) {
+  const token = await getAccessToken({ redirectToLogin: true });
+
+  try {
+    const petition = await fetch(SUBJECT_ROUTES.DELETE_SUBJECT(subjectId), {
+      method: "DELETE",
+      headers: {
+        ...getCookieHeader(token),
+        "Content-Type": "application/json",
+      },
+    });
+    const res = await petition.json();
+
+    validateResponse(res);
+
+    return res.message;
+  } catch (error) {
+    await handleErrors(error);
+  }
+}
