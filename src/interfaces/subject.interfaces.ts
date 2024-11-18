@@ -12,8 +12,18 @@ export interface ISubject {
   exams: IExam[];
   documents: string[];
   color: string;
+  createdAt: Date;
+  updatedAt: Date;
   _id: string;
 }
+
+export type ICreateSubject = Omit<
+  ISubject,
+  "_id" | "createdAt" | "updatedAt" | "userId" | "color"
+> &
+  Partial<Pick<ISubject, "color">>;
+
+export type IUpdateSubject = Partial<ICreateSubject>;
 
 export interface IGetSubjectsResponse extends IResponse {
   subjects: ISubject[];

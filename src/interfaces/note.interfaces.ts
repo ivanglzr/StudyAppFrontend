@@ -3,3 +3,7 @@ export interface INote {
   content: string;
   _id: string;
 }
+
+export type ICreateNote = Omit<INote, "_id">;
+
+export type IUpdateNote = Partial<ICreateNote>;

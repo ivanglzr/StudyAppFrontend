@@ -5,3 +5,7 @@ export interface IFlashcard {
   learned: boolean;
   _id: string;
 }
+
+export type ICreateFlashcard = Omit<IFlashcard, "_id">;
+
+export type IUpdateFlashcard = Partial<ICreateFlashcard>;

@@ -4,9 +4,9 @@ import { getAccessToken } from "../cookies";
 import { getCookieHeader, handleErrors, validateResponse } from "../utils";
 
 import {
+  ICreateSubject,
   IGetSubjectResponse,
   IGetSubjectsResponse,
-  ISubject,
 } from "@/interfaces/subject.interfaces";
 
 import { SUBJECT_ROUTES } from "./subject.routes";
@@ -53,7 +53,7 @@ export async function getSubject(subjectId: string) {
   }
 }
 
-export async function postSubject(subject: ISubject) {
+export async function postSubject(subject: ICreateSubject) {
   const token = await getAccessToken({ redirectToLogin: true });
 
   try {
