@@ -31,7 +31,7 @@ export function SideBar() {
   const pathname = usePathname();
 
   return (
-    <aside className="bg-muted">
+    <aside className="bg-muted fixed w-20 h-full">
       <ul className="h-full flex flex-col items-center mt-1">
         {links.map(({ text, icon, href }) => (
           <li key={text} className="w-full px-2 mt-1">
