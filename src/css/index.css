@@ -68,4 +68,28 @@
     @apply bg-background text-foreground;
     transition: background-color 0.3s, color 0.3s;
   }
+
+  [type="color"] {
+    @apply rounded-lg;
+    display: inline-flex;
+    vertical-align: bottom;
+    border: none;
+    padding: 0;
+    width: 100%;
+    cursor: pointer;
+
+    &::-webkit-color-swatch-wrapper {
+      padding: 0;
+    }
+
+    &::-webkit-color-swatch {
+      @apply rounded-lg;
+      border: 0;
+    }
+
+    &::-moz-color-swatch {
+      @apply rounded-lg;
+      border: 0;
+    }
+  }
 }
