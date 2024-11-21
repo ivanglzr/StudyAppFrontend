@@ -19,9 +19,9 @@ export interface ISubject {
 
 export interface ICreateSubject {
   subjectName: string;
-  flashcards: ICreateFlashcard[];
-  notes: ICreateNote[];
-  exams: ICreateExam[];
+  flashcards?: ICreateFlashcard[];
+  notes?: ICreateNote[];
+  exams?: ICreateExam[];
   color?: string;
 }
 
