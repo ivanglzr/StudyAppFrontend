@@ -1,8 +1,8 @@
 import { IResponse } from "./response.interfaces";
 
-import { IFlashcard } from "./flashcard.interfaces";
-import { INote } from "./note.interfaces";
-import { IExam } from "./exam.interfaces";
+import { ICreateFlashcard, IFlashcard } from "./flashcard.interfaces";
+import { ICreateNote, INote } from "./note.interfaces";
+import { ICreateExam, IExam } from "./exam.interfaces";
 
 export interface ISubject {
   userId: string;
@@ -17,11 +17,13 @@ export interface ISubject {
   _id: string;
 }
 
-export type ICreateSubject = Omit<
-  ISubject,
-  "_id" | "createdAt" | "updatedAt" | "userId" | "color"
-> &
-  Partial<Pick<ISubject, "color">>;
+export interface ICreateSubject {
+  subjectName: string;
+  flashcards: ICreateFlashcard[];
+  notes: ICreateNote[];
+  exams: ICreateExam[];
+  color?: string;
+}
 
 export type IUpdateSubject = Partial<ICreateSubject>;
 
