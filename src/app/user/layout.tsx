@@ -6,9 +6,11 @@ export default function HomeLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen grid grid-cols-[80px_auto]">
+    <div className="min-h-screen grid grid-cols-1">
       <SideBar />
-      <main className="bg-muted m-4 p-2 rounded-lg">{children}</main>
+      <main className="bg-muted m-4 p-2 ml-24 rounded-lg overflow-y-scroll">
+        {children}
+      </main>
     </div>
   );
 }
