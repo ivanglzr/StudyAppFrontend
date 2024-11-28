@@ -1,6 +1,7 @@
 "use client";
 
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
+import { useAlertMessageStore } from "@/store/alertMessage.store";
 
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -21,6 +22,10 @@ import { postSubject } from "@/services/subject/subject.service";
 import { ICreateSubject } from "@/interfaces/subject.interfaces";
 
 export function CreateSubjectDialog() {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const showAlert = useAlertMessageStore((state) => state.showAlert);
+
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -28,11 +33,26 @@ export function CreateSubjectDialog() {
 
     const message = await postSubject(data as unknown as ICreateSubject);
 
-    alert(message);
+    setIsOpen(false);
+
+    const alertMessageProps =
+      message === undefined
+        ? ({
+            title: "Error",
+            message: "An error ocurred",
+            variant: "destructive",
+          } as const)
+        : ({
+            title: "Success",
+            message,
+            variant: "default",
+          } as const);
+
+    showAlert(alertMessageProps);
   };
 
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button className="ml-auto">Create subject</Button>
       </DialogTrigger>
