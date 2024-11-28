@@ -3,6 +3,7 @@
 import { getAccessToken } from "../cookies";
 import { getCookieHeader, handleErrors, validateResponse } from "../utils";
 
+import { IResponse } from "@/interfaces/response.interfaces";
 import {
   ICreateSubject,
   IGetSubjectResponse,
@@ -66,7 +67,7 @@ export async function postSubject(subject: ICreateSubject) {
       },
       body: JSON.stringify(subject),
     });
-    const res = await petition.json();
+    const res: IResponse = await petition.json();
 
     validateResponse(res);
 
@@ -88,7 +89,7 @@ export async function putSubject(subjectId: string, subject: IUpdateSubject) {
       },
       body: JSON.stringify(subject),
     });
-    const res = await petition.json();
+    const res: IResponse = await petition.json();
 
     validateResponse(res);
 
