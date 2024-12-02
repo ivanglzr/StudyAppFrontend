@@ -10,7 +10,7 @@ export interface ISubjectFlashcardsStats {
   learnedFlashcards: number;
 }
 
-export interface IFlashcardStats {
+export interface IFlashcardsStats {
   learnedFlashcardsPercentage: number;
   totalFlashcards: number;
   learnedFlashcards: number;
@@ -26,7 +26,7 @@ export interface ISubjectStats {
 export interface IStats {
   userId: string;
   totalTime: number;
-  flashcardStats: IFlashcardStats;
+  flashcardsStats: IFlashcardsStats;
   subjectsStats: ISubjectStats[];
 
   _id: string;

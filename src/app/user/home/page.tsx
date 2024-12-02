@@ -15,7 +15,9 @@ export default async function HomePage() {
       <div className="grid grid-cols-2 gap-4">
         <StudyTimeChart subjectsStats={stats.subjectsStats} />
         <LearnedFlashcardsChart
-          subjectsFlashcardsStats={stats.flashcardStats.subjectsFlashcardsStats}
+          subjectsFlashcardsStats={
+            stats.flashcardsStats.subjectsFlashcardsStats
+          }
         />
       </div>
     </>
