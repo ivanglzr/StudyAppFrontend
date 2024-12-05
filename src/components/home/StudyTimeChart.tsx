@@ -36,6 +36,8 @@ function getChartConfig(subjectStats: ISubjectStats[]) {
     };
   });
 
+  if (chartData.every((data) => data.studyTime === 0)) return undefined;
+
   return { chartData, chartConfig };
 }
 
@@ -44,7 +46,11 @@ interface Props {
 }
 
 export function StudyTimeChart({ subjectsStats }: Props) {
-  const { chartData, chartConfig } = getChartConfig(subjectsStats);
+  const chart = getChartConfig(subjectsStats);
+
+  if (chart === undefined) return <h2>You haven't studied anything 😡</h2>;
+
+  const { chartData, chartConfig } = chart;
 
   const totalStudyTime = useMemo(() => {
     return chartData.reduce((acc, curr) => acc + curr.studyTime, 0);

@@ -29,6 +29,8 @@ function getChartData(subjectsFlashcardsStats: ISubjectFlashcardsStats[]) {
     totalFlashcards: stats.totalFlashcards,
   }));
 
+  if (chartData.every((data) => data.totalFlashcards === 0)) return undefined;
+
   return chartData;
 }
 
@@ -38,6 +40,14 @@ interface Props {
 
 export function LearnedFlashcardsChart({ subjectsFlashcardsStats }: Props) {
   const chartData = getChartData(subjectsFlashcardsStats);
+
+  if (chartData === undefined)
+    return (
+      <div>
+        <h2>There isn't any Flashcards</h2>
+        <p>Why haven't you created one yet?</p>
+      </div>
+    );
 
   return (
     <Card className="bg-transparent">
