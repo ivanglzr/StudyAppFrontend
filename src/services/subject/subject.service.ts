@@ -1,5 +1,7 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
+
 import { getAccessToken } from "../cookies";
 import { getCookieHeader, handleErrors, validateResponse } from "../utils";
 
@@ -12,6 +14,7 @@ import {
 } from "@/interfaces/subject.interfaces";
 
 import { SUBJECT_ROUTES } from "./subject.routes";
+import { ROUTES } from "@/config";
 
 export async function getSubjects() {
   const token = await getAccessToken({ redirectToLogin: true });
@@ -71,6 +74,8 @@ export async function postSubject(subject: ICreateSubject) {
 
     validateResponse(res);
 
+    revalidatePath(ROUTES.LIBRARY);
+
     return res.message;
   } catch (error) {
     await handleErrors(error);
@@ -93,6 +98,8 @@ export async function putSubject(subjectId: string, subject: IUpdateSubject) {
 
     validateResponse(res);
 
+    revalidatePath(ROUTES.LIBRARY);
+
     return res.message;
   } catch (error) {
     await handleErrors(error);
@@ -113,6 +120,8 @@ export async function deleteSubject(subjectId: string) {
     const res = await petition.json();
 
     validateResponse(res);
+
+    revalidatePath(ROUTES.LIBRARY);
 
     return res.message;
   } catch (error) {
