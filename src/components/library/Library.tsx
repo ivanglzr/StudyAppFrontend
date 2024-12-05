@@ -1,16 +1,10 @@
-import { Subject } from "./Subject";
 import { CreateSubjectDialog } from "./CreateSubjectDialog";
 
 import { getSubjects } from "@/services/subject/subject.service";
+import { Subjects } from "./Subjects";
 
 export async function Library() {
   const subjects = await getSubjects();
-
-  if (subjects === undefined)
-    return <span>An error ocurred while loading the subjects</span>;
-
-  if (subjects.length === 0)
-    return <span>You don&apos;t have any subjects, create one!</span>;
 
   return (
     <>
@@ -18,11 +12,7 @@ export async function Library() {
         <h1>Subjects</h1>
         <CreateSubjectDialog />
       </header>
-      <section className="grid grid-cols-4 gap-4 mx-2">
-        {subjects.map((subject) => (
-          <Subject subject={subject} key={subject._id} />
-        ))}
-      </section>
+      <Subjects subjects={subjects} />
     </>
   );
 }
