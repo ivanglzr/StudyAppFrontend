@@ -50,9 +50,9 @@ export function LearnedFlashcardsChart({ subjectsFlashcardsStats }: Props) {
     );
 
   return (
-    <Card className="bg-transparent">
+    <Card className="bg-transparent shadow-none border-none text-center">
       <CardHeader>
-        <CardTitle className="text-2xl">Learned Flashcards</CardTitle>
+        <CardTitle className="text-2xl mb-2">Learned Flashcards</CardTitle>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>
@@ -71,12 +71,12 @@ export function LearnedFlashcardsChart({ subjectsFlashcardsStats }: Props) {
             <Bar
               dataKey="learnedFlashcards"
               fill="var(--color-learnedFlashcards)"
-              radius={4}
+              radius={7}
             />
             <Bar
               dataKey="totalFlashcards"
               fill="var(--color-totalFlashcards)"
-              radius={4}
+              radius={7}
             />
           </BarChart>
         </ChartContainer>

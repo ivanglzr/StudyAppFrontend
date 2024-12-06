@@ -57,7 +57,7 @@ export function StudyTimeChart({ subjectsStats }: Props) {
   }, [chartData]);
 
   return (
-    <Card className="flex flex-col bg-transparent">
+    <Card className="flex flex-col bg-transparent shadow-none border-none">
       <CardHeader className="items-center pb-0">
         <CardTitle className="text-2xl">Study Time Stats</CardTitle>
       </CardHeader>
