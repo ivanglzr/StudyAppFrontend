@@ -1,5 +1,5 @@
-import { LearnedFlashcardsChart } from "@/components/home/LearnedFlashcardsChart";
-import { StudyTimeChart } from "@/components/home/StudyTimeChart";
+import { StatsContainer } from "@/components/home/StatsContainer";
+
 import { getStats } from "@/services/stats/stats.service";
 
 export default async function HomePage() {
@@ -7,19 +7,5 @@ export default async function HomePage() {
 
   if (!stats) return <p>There isn&apos;t any stats</p>;
 
-  return (
-    <>
-      <header className="flex m-2 mb-6 text-4xl border-b-2 border-b-foreground/75 opacity-90">
-        <h1>Stats</h1>
-      </header>
-      <div className="grid grid-cols-2 gap-4">
-        <StudyTimeChart subjectsStats={stats.subjectsStats} />
-        <LearnedFlashcardsChart
-          subjectsFlashcardsStats={
-            stats.flashcardsStats.subjectsFlashcardsStats
-          }
-        />
-      </div>
-    </>
-  );
+  return <StatsContainer stats={stats} />;
 }
