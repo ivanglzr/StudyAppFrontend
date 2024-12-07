@@ -19,24 +19,26 @@ function getChartConfig(subjectStats: ISubjectStats[]) {
     },
   };
 
-  const chartData = subjectStats.map((stats, i) => {
-    const { subjectName } = stats.subject;
+  const chartData = subjectStats
+    .filter((stats) => stats.studyTime > 0)
+    .map((stats, i) => {
+      const { subjectName } = stats.subject;
 
-    const chartIndex = (i % 5) + 1;
+      const index = (i % 5) + 1;
 
-    chartConfig[subjectName] = {
-      label: subjectName,
-      color: `hsl(var(--chart-${chartIndex}))`,
-    };
+      chartConfig[subjectName] = {
+        label: subjectName,
+        color: `hsl(var(--chart-${index}))`,
+      };
 
-    return {
-      subjectName,
-      studyTime: stats.studyTime,
-      fill: `var(--color-${subjectName})`,
-    };
-  });
+      return {
+        subjectName,
+        studyTime: parseFloat((stats.studyTime / 60.0).toFixed(2)),
+        fill: `var(--color-${subjectName})`,
+      };
+    });
 
-  if (chartData.every((data) => data.studyTime === 0)) return undefined;
+  if (chartData.length === 0) return undefined;
 
   return { chartData, chartConfig };
 }
@@ -53,7 +55,7 @@ export function StudyTimeChart({ subjectsStats }: Props) {
   const { chartData, chartConfig } = chart;
 
   const totalStudyTime = useMemo(() => {
-    return chartData.reduce((acc, curr) => acc + curr.studyTime, 0);
+    return chartData.reduce((acc, curr) => acc + curr.studyTime, 0).toFixed(2);
   }, [chartData]);
 
   return (
