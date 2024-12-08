@@ -1,7 +1,5 @@
 import { z } from "zod";
 
-import { ILogIn, IRegister } from "@/interfaces/auth.interfaces";
-
 export type ErrorMessagesForInterface<T extends object> = {
   [K in keyof T]: string | null;
 };
@@ -52,8 +50,8 @@ const registerSchema = z.object({
   password: passwordSchema,
 });
 
-export const validateLogInSchema = (loginData: ILogIn) =>
+export const validateLogInSchema = (loginData: unknown) =>
   logInSchema.safeParse(loginData);
 
-export const validateRegisterSchema = (registerData: IRegister) =>
+export const validateRegisterSchema = (registerData: unknown) =>
   registerSchema.safeParse(registerData);

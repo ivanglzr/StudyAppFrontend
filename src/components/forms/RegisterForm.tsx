@@ -9,7 +9,7 @@ import { FormGroup } from "./FormGroup";
 
 import { register } from "@/services/auth/auth.service";
 
-import { validateRegisterSchema } from "@/lib/validation";
+import { validateRegisterSchema } from "@/schemas/auth.schemas";
 
 import { IRegister } from "@/interfaces/auth.interfaces";
 
