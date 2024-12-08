@@ -5,6 +5,7 @@ export const ROUTES = {
   USER_ENDPOINT: "/home",
   HOME: "/user/home",
   LIBRARY: "/user/library",
+  SUBJECT_PAGE: (subjectId: string) => `/user/library/${subjectId}`,
 };
 
 export const accessTokenCookieName = "access_token";
