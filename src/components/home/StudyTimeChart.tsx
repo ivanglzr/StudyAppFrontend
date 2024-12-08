@@ -24,17 +24,14 @@ function getChartConfig(subjectStats: ISubjectStats[]) {
     .map((stats, i) => {
       const { subjectName } = stats.subject;
 
-      const index = (i % 5) + 1;
-
       chartConfig[subjectName] = {
         label: subjectName,
-        color: `hsl(var(--chart-${index}))`,
       };
 
       return {
         subjectName,
         studyTime: parseFloat((stats.studyTime / 60.0).toFixed(2)),
-        fill: `var(--color-${subjectName})`,
+        fill: stats.subject.color,
       };
     });
 
