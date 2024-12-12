@@ -12,12 +12,10 @@ const answerSchema = z
   .string({
     invalid_type_error: "An answer must be an string",
   })
-  .min(1, "An answer must have atleast 1 character")
   .max(150, "An answer can't have more than 50 characters");
 
 const tagSchema = z
   .string({ invalid_type_error: "A tag must be an string" })
-  .min(1, "A tag must have atleast 1 character")
   .max(20, "A tag can't have more than 20 characters");
 
 const learnedSchema = z.boolean({
@@ -27,8 +25,11 @@ const learnedSchema = z.boolean({
 
 const flashcardSchema = z.object({
   title: titleSchema,
-  answers: z.array(answerSchema).nonempty(),
-  tags: z.array(tagSchema),
+  answers: z
+    .array(answerSchema)
+    .nonempty()
+    .transform((arr) => arr.filter((e) => e !== "")),
+  tags: z.array(tagSchema).transform((arr) => arr.filter((e) => e !== "")),
   learned: learnedSchema,
 });
 
