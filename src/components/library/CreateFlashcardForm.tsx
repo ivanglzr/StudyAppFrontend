@@ -25,8 +25,12 @@ export function CreateFlashcardForm({ subjectId, setIsOpen }: Props) {
     state: flashcard,
     setTitle,
     setLastAnswer,
+    setLastTag,
+    setLearned,
     addNewAnswer,
+    addNewTag,
     deleteAnswer,
+    deleteTag,
   } = useFlashcardReducer();
 
   const showAlert = useAlertMessageStore((state) => state.showAlert);
@@ -88,32 +92,88 @@ export function CreateFlashcardForm({ subjectId, setIsOpen }: Props) {
           name="answer"
           placeholder="Answer"
           id="answer"
-          value={flashcard.answers[flashcard.answers.length - 1]}
+          value={flashcard.answers[flashcard.answers.length - 1] ?? ""}
           onChange={(e) => setLastAnswer(e.target.value)}
         />
         <Button
           type="button"
           onClick={addNewAnswer}
           variant="ghost"
-          className="px-0 mb-2 hover:bg-transparent hover:underline"
+          className="px-0 hover:bg-transparent hover:underline"
         >
           Add answer
         </Button>
-        <ul>
-          <h4 className="underline">Answers</h4>
-          {flashcard.answers.map((answer, index) => {
-            if (answer === "") return;
+        {flashcard.answers[0] !== "" && flashcard.answers.length !== 0 && (
+          <ul>
+            <h4 className="underline">Answers</h4>
+            {flashcard.answers.map((answer, index) => {
+              if (answer === "") return;
 
-            return (
-              <li className="ml-1 flex items-center" key={answer + index}>
-                <span>{answer}</span>
-                <button onClick={() => deleteAnswer(index)}>
-                  <Trash className="ml-4" color="#dd0000" />
-                </button>
-              </li>
-            );
-          })}
-        </ul>
+              return (
+                <li className="flex items-center" key={answer + index}>
+                  <span>
+                    {index + 1}. {answer}
+                  </span>
+                  <button onClick={() => deleteAnswer(index)}>
+                    <Trash className="ml-4" color="#dd0000" />
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        )}
+      </div>
+      <div className="mt-4">
+        <Label htmlFor="tag" className="text-md">
+          Tag
+        </Label>
+        <Input
+          name="tag"
+          placeholder="Tag"
+          id="tag"
+          value={flashcard.tags[flashcard.tags.length - 1] ?? ""}
+          onChange={(e) => setLastTag(e.target.value)}
+        />
+        <Button
+          type="button"
+          onClick={addNewTag}
+          variant="ghost"
+          className="px-0 hover:bg-transparent hover:underline"
+        >
+          Add tag
+        </Button>
+        {flashcard.tags[0] !== "" && flashcard.tags.length !== 0 && (
+          <div>
+            <h4 className="underline">Tags</h4>
+            <ul className="flex flex-wrap gap-4">
+              {flashcard.tags.map((tag, index) => {
+                if (tag === "") return;
+
+                return (
+                  <li className="flex items-center" key={tag + index}>
+                    <span
+                      className="hover:text-red-500 cursor-pointer"
+                      onClick={() => deleteTag(index)}
+                    >
+                      #{tag}
+                    </span>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
+      </div>
+      <div className="flex items-center gap-2 mt-4">
+        <Label htmlFor="learned">Learned</Label>
+        <Input
+          type="checkbox"
+          className="w-4 h-4"
+          name="learned"
+          id="learned"
+          checked={flashcard.learned}
+          onChange={(e) => setLearned(e.target.checked)}
+        />
       </div>
       <DialogFooter className="mt-4">
         <Button type="submit">Submit</Button>
