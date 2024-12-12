@@ -10,7 +10,7 @@ import {
 
 const initialFlashcard: ICreateFlashcard = {
   title: "",
-  answers: [],
+  answers: [""],
   tags: [],
   learned: false,
 };
