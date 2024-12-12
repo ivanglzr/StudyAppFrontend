@@ -19,7 +19,7 @@ function getContrastColor(hex: string) {
 
   const luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
 
-  return luminance > 128 ? "hsl(var(--foreground))" : "hsl(var(--background))";
+  return luminance > 128 ? "#000000" : "#FFFFFF";
 }
 
 interface Props {
