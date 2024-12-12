@@ -1,11 +1,14 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
+
 import { getAccessToken } from "../cookies";
 import { getCookieHeader, handleErrors, validateResponse } from "../utils";
 
 import { ICreateFlashcard } from "@/interfaces/flashcard.interfaces";
 
 import { FLASHCARD_ROUTES } from "./flashcard.routes";
+import { ROUTES } from "@/config";
 
 export async function postFlashcard(
   subjectId: string,
@@ -25,6 +28,8 @@ export async function postFlashcard(
     const res = await petition.json();
 
     validateResponse(res);
+
+    revalidatePath(ROUTES.SUBJECT_PAGE(subjectId));
 
     return res.message;
   } catch (error) {
