@@ -17,6 +17,8 @@ interface Props {
 interface Actions {
   setTheme: (newTheme: Partial<Theme>) => void;
   setInitialTheme: () => void;
+  toggleDarkMode: () => void;
+  setColorTheme: (colorTheme: ThemeColors) => void;
 }
 
 function getThemeFromLocalStorage() {
@@ -108,6 +110,12 @@ export const useThemeStore = create<Props & Actions>((set, get) => ({
 
     if (!theme) return;
 
-    set({ theme });
+    get().setTheme(theme);
   },
+  toggleDarkMode: () => {
+    const { theme, setTheme } = get();
+
+    setTheme({ darkMode: !theme.darkMode });
+  },
+  setColorTheme: (colorTheme: ThemeColors) => get().setTheme({ colorTheme }),
 }));
