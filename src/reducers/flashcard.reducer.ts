@@ -28,6 +28,8 @@ export function FlashcardReducer(
     case EFlashcardReducerActions.SET_LAST_ANSWER: {
       const answer = action.payload;
 
+      if (answer === "") return state;
+
       const answers = [...state.answers];
 
       if (answer.length > 0) answers[answers.length - 1] = answer;
@@ -38,6 +40,8 @@ export function FlashcardReducer(
 
     case EFlashcardReducerActions.SET_LAST_TAG: {
       const tag = action.payload;
+
+      if (tag === "") return state;
 
       const tags = [...state.tags];
 
