@@ -18,8 +18,8 @@ export function AlertMessage() {
     <>
       {isVisible && (
         <Alert
-          className={`bg-background ${centerAbsolute} min-w-80 w-max shadow-lg shadow-gray-500 border-2 ${
-            props.variant === "default" ? "border border-black" : ""
+          className={`bg-background ${centerAbsolute} min-w-80 w-max border-2 ${
+            props.variant === "default" ? "border border-foreground" : ""
           }`}
           variant={props.variant}
         >
@@ -28,8 +28,10 @@ export function AlertMessage() {
           ) : (
             <AlertCircle size={20} />
           )}
-          <AlertTitle className="text-lg font-bold">{props.title}</AlertTitle>
-          <AlertDescription>{props.message}</AlertDescription>
+          <AlertTitle className="text-2xl font-bold">{props.title}</AlertTitle>
+          <AlertDescription className="text-lg">
+            {props.message}
+          </AlertDescription>
 
           <button
             onClick={hideAlert}

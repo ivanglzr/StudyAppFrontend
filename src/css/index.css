@@ -51,31 +51,37 @@
     }
 
     &::-webkit-scrollbar-track {
-      @apply bg-background;
+      @apply bg-transparent;
     }
 
     &::-webkit-scrollbar-thumb {
-      @apply bg-foreground/60;
+      @apply bg-zinc-600/70;
       @apply rounded-lg;
     }
 
     &::-webkit-scrollbar-thumb:hover {
-      @apply bg-foreground/80;
+      @apply bg-zinc-700;
     }
   }
 
   body {
     @apply bg-background text-foreground;
-    transition: background-color 0.3s, color 0.3s;
+    transition:
+      background-color 0.3s,
+      color 0.3s;
   }
 
   [type="color"] {
     @apply rounded-lg;
+    width: 100%;
+
+    background-color: transparent;
+
     display: inline-flex;
     vertical-align: bottom;
-    border: none;
+
     padding: 0;
-    width: 100%;
+
     cursor: pointer;
 
     &::-webkit-color-swatch-wrapper {
