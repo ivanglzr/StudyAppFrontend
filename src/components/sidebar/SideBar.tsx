@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 
-import { Home, Library } from "lucide-react";
+import { Home, Library, User } from "lucide-react";
 
 import { LogOutButton } from "./LogOutButton";
 import { LinkIcon } from "./LinkIcon";
@@ -14,16 +14,27 @@ const iconProps = {
   strokeWidth: 1.5,
 };
 
-const links = [
+interface ILink {
+  text: string;
+  icon: (color: string) => JSX.Element;
+  href: string;
+}
+
+const links: ILink[] = [
   {
     text: "Home",
-    icon: (color: string) => <Home {...iconProps} color={color} />,
+    icon: (color) => <Home {...iconProps} color={color} />,
     href: ROUTES.HOME,
   },
   {
     text: "Library",
-    icon: (color: string) => <Library {...iconProps} color={color} />,
+    icon: (color) => <Library {...iconProps} color={color} />,
     href: ROUTES.LIBRARY,
+  },
+  {
+    text: "Profile",
+    icon: (color) => <User {...iconProps} color={color} />,
+    href: ROUTES.PROFILE,
   },
 ];
 
