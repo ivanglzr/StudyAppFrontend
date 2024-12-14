@@ -18,14 +18,14 @@ export function ThemeManager() {
 
   const theme = useThemeStore((state) => state.theme);
 
-  useEffect(() => setInitialTheme(), []);
+  useEffect(setInitialTheme, []);
 
   return (
     <div className="flex items-center gap-6 absolute bottom-0 right-0 m-6 rounded-lg">
       <div className="flex gap-2">
-        {themeColors.map((themeColor) => (
+        {themeColors.map((themeColor, index) => (
           <button
-            key={themeColor}
+            key={index}
             className="w-6 h-6 rounded-sm"
             style={{ backgroundColor: themeColor }}
             onClick={() => setColorTheme(themeColor)}
