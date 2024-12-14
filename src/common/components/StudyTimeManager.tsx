@@ -28,8 +28,6 @@ export function StudyTimeManager() {
     const studyTime =
       (actualDate - parseInt(studySessionInit, 10)) / (1000 * 60);
 
-    console.log("wowow: ", studyTime);
-
     sessionStorage.setItem(sessionInitLocalStorageName, actualDate.toString());
 
     await updateSubjectStudyTime(subjectId, studyTime);
