@@ -76,7 +76,12 @@ export function CreateSubjectDialog() {
             <Label htmlFor="color" className="text-md">
               Color
             </Label>
-            <input type="color" name="color" className="h-10" id="color" />
+            <input
+              type="color"
+              name="color"
+              className="h-10 border bg-primary border-primary"
+              id="color"
+            />
           </div>
           <DialogFooter className="mt-4">
             <Button type="submit">Submit</Button>
