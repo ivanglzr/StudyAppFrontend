@@ -1,10 +1,10 @@
-import "@/css/index.css";
-import { poppins } from "@/css/fonts";
+import "@/common/css/index.css";
+import { poppins } from "@/common/css/fonts";
 
 import type { Metadata } from "next";
 
-import { AlertMessage } from "@/components/AlertMessage";
-import { ThemeManager } from "@/components/ThemeManager";
+import { AlertMessage } from "@/alert-message/components";
+import { ThemeManager } from "@/theme/components";
 
 export const metadata: Metadata = {
   title: "Create Next App",

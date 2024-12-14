@@ -1,8 +1,8 @@
-import { Header } from "@/components/header/Header";
-import { FlashcardsCarousel } from "@/components/library/FlashcardsCarousel";
-import { CreateFlashcardDialog } from "@/components/library/CreateFlashcardDialog";
+import { Header } from "@/common/components/header";
+import { FlashcardsCarousel } from "@/flashcard/components";
+import { CreateFlashcardDialog } from "@/flashcard/components";
 
-import { getSubject } from "@/services/subject/subject.service";
+import { getSubject } from "@/subject/services";
 
 interface Props {
   params: { subjectId: string };
