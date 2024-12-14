@@ -1,27 +1,17 @@
 import { Header } from "@/components/header/Header";
-import { LearnedFlashcardsChart } from "@/components/home/LearnedFlashcardsChart";
-import { StudyTimeChart } from "@/components/home/StudyTimeChart";
 
-import { IStats } from "@/interfaces/stats.interfaces";
+import { getStats } from "@/services/stats/stats.service";
+import { ChartsContainer } from "./ChartsContainer";
 
-interface Props {
-  stats: IStats;
-}
+export async function StatsContainer() {
+  const stats = await getStats();
 
-export function StatsContainer({ stats }: Props) {
   return (
     <>
       <Header>
         <h1>Stats</h1>
       </Header>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <StudyTimeChart subjectsStats={stats.subjectsStats} />
-        <LearnedFlashcardsChart
-          subjectsFlashcardsStats={
-            stats.flashcardsStats.subjectsFlashcardsStats
-          }
-        />
-      </div>
+      <ChartsContainer stats={stats} />
     </>
   );
 }
