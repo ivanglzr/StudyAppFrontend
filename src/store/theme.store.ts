@@ -2,12 +2,12 @@
 
 import { create } from "zustand";
 
-export const themeColors = ["blue", "green", "purple"] as const;
+export const themeColors = ["blue", "green", "purple", undefined] as const;
 export type ThemeColors = (typeof themeColors)[number];
 
 interface Theme {
   darkMode: boolean;
-  colorTheme: ThemeColors | undefined;
+  colorTheme: ThemeColors;
 }
 
 interface Props {
@@ -15,7 +15,7 @@ interface Props {
 }
 
 interface Actions {
-  setTheme: (newTheme: Partial<Theme>) => void;
+  setTheme: (newTheme: Theme) => void;
   setInitialTheme: () => void;
   toggleDarkMode: () => void;
   setColorTheme: (colorTheme: ThemeColors) => void;
@@ -58,22 +58,12 @@ function toggleDarkMode(darkMode: boolean) {
   document.body.classList.toggle("dark", darkMode);
 }
 
-function applyColorTheme(
-  prevColor: ThemeColors | undefined,
-  newColor: ThemeColors
-) {
-  if (themeColors.includes(newColor)) {
-    if (prevColor !== undefined)
-      document.body.classList.remove(`theme-${prevColor}`);
+function applyColorTheme(prevColor: ThemeColors, newColor: ThemeColors) {
+  document.body.classList.remove(`theme-${prevColor}`);
 
-    document.body.classList.add(`theme-${newColor}`);
+  document.body.classList.add(`theme-${newColor}`);
 
-    return newColor;
-  } else {
-    document.body.classList.remove(`theme-${prevColor}`);
-
-    return undefined;
-  }
+  return newColor;
 }
 
 export const useThemeStore = create<Props & Actions>((set, get) => ({
@@ -81,29 +71,22 @@ export const useThemeStore = create<Props & Actions>((set, get) => ({
     darkMode: false,
     colorTheme: undefined,
   },
-  setTheme: (newTheme: Partial<Theme>) => {
+  setTheme: (newTheme) => {
     const actualTheme = get().theme;
-
-    const updatedTheme = {
-      ...actualTheme,
-      ...newTheme,
-    };
 
     const darkMode = newTheme.darkMode;
 
-    if (darkMode !== undefined) toggleDarkMode(darkMode);
+    toggleDarkMode(darkMode);
 
     const colorTheme = newTheme.colorTheme;
 
-    if (colorTheme !== undefined) {
-      const newColorTheme = applyColorTheme(actualTheme.colorTheme, colorTheme);
+    const newColorTheme = applyColorTheme(actualTheme.colorTheme, colorTheme);
 
-      updatedTheme.colorTheme = newColorTheme;
-    }
+    newTheme.colorTheme = newColorTheme;
 
-    set({ theme: updatedTheme });
+    set({ theme: newTheme });
 
-    saveThemeInLocalStorage(updatedTheme);
+    saveThemeInLocalStorage(newTheme);
   },
   setInitialTheme: () => {
     const theme = setInitialTheme();
@@ -115,7 +98,11 @@ export const useThemeStore = create<Props & Actions>((set, get) => ({
   toggleDarkMode: () => {
     const { theme, setTheme } = get();
 
-    setTheme({ darkMode: !theme.darkMode });
+    setTheme({ ...theme, darkMode: !theme.darkMode });
   },
-  setColorTheme: (colorTheme: ThemeColors) => get().setTheme({ colorTheme }),
+  setColorTheme: (colorTheme: ThemeColors) => {
+    const { theme, setTheme } = get();
+
+    setTheme({ ...theme, colorTheme });
+  },
 }));
