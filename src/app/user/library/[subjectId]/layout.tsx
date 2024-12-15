@@ -1,4 +1,4 @@
-import { StudyTimeManager } from "@/components/StudyTimeManager";
+import { StudyTimeManager } from "@/common/components";
 
 export default function SubjectLayout({
   children,
