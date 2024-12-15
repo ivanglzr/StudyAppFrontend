@@ -1,5 +1,6 @@
-import { Header } from "@/components/header/Header";
-import { getUser } from "@/services/user/user.service";
+import { Header } from "@/common/components/header";
+
+import { getUser } from "@/user/services";
 
 export default async function ProfilePage() {
   const user = await getUser();
