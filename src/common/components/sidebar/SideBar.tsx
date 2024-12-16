@@ -55,7 +55,7 @@ export function SideBar() {
           </li>
         ))}
         <li className="w-full mt-auto mb-6 px-2">
-          <LogOutButton />
+          <LogOutButton iconProps={iconProps} />
         </li>
       </ul>
     </aside>
