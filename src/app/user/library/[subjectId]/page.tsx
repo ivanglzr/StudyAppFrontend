@@ -9,11 +9,6 @@ interface Props {
   params: { subjectId: string };
 }
 
-function getStringBeforeDash(input: string) {
-  const match = input.match(/^(.*?)-\d+\./);
-  return match ? match[1] : null;
-}
-
 export default async function SubjectPage({ params }: Props) {
   const { subjectId } = await params;
 
@@ -28,7 +23,9 @@ export default async function SubjectPage({ params }: Props) {
         <CreateFlashcardDialog subjectId={subject._id} />
       </Header>
       <FlashcardsCarousel flashcards={subject.flashcards} />
-      <DocumentsList documents={subject.documents} subjectId={subjectId} />
+      {subject.documents.length !== 0 && (
+        <DocumentsList documents={subject.documents} subjectId={subjectId} />
+      )}
     </>
   );
 }
