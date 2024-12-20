@@ -23,9 +23,7 @@ export default async function SubjectPage({ params }: Props) {
         <CreateFlashcardDialog subjectId={subject._id} />
       </Header>
       <FlashcardsCarousel flashcards={subject.flashcards} />
-      {subject.documents.length !== 0 && (
-        <DocumentsList documents={subject.documents} subjectId={subjectId} />
-      )}
+      <DocumentsList documents={subject.documents} subjectId={subjectId} />
     </>
   );
 }
