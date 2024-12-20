@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { extname } from "node:path";
 
-import { Icon } from ".";
+import { CreateDocumentDialog, Icon } from ".";
 
 interface Props {
   documents: string[];
@@ -17,7 +17,10 @@ function getStringBeforeDash(input: string) {
 export function DocumentsList({ documents, subjectId }: Props) {
   return (
     <div className="mt-4 pt-2 border-t-2 border-t-background">
-      <h2 className="mb-2 text-2xl">Documents</h2>
+      <header className="flex justify-between">
+        <h2 className="mb-2 text-2xl">Documents</h2>
+        <CreateDocumentDialog subjectId={subjectId} />
+      </header>
       <ul>
         {documents.map((document) => (
           <li key={document}>
@@ -30,6 +33,7 @@ export function DocumentsList({ documents, subjectId }: Props) {
             </Link>
           </li>
         ))}
+        {documents.length === 0 && <span>You don't have any documents</span>}
       </ul>
     </div>
   );
