@@ -11,7 +11,7 @@ import {
   DialogTrigger,
   DialogDescription,
 } from "@/common/components/ui";
-import { SubjectForm } from "./SubjectForm";
+import { SubjectForm } from ".";
 import { Edit } from "lucide-react";
 
 import { putSubject } from "../services";

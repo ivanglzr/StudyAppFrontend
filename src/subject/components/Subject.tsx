@@ -7,7 +7,7 @@ import {
   CardDescription,
   CardFooter,
 } from "@/common/components/ui";
-import { EditSubjectDialog } from "./EditSubjectDialog";
+import { EditSubjectDialog } from ".";
 
 import { ISubject } from "../interfaces";
 
