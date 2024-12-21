@@ -17,13 +17,8 @@ export interface ISubject {
   _id: string;
 }
 
-export interface ICreateSubject {
-  subjectName: string;
-  flashcards?: ICreateFlashcard[];
-  notes?: ICreateNote[];
-  exams?: ICreateExam[];
-  color?: string;
-}
+export type ICreateSubject = Pick<ISubject, "subjectName"> &
+  Partial<Pick<ISubject, "color">>;
 
 export type IUpdateSubject = Partial<ICreateSubject>;
 
