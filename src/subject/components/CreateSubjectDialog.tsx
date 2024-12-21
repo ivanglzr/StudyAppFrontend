@@ -5,20 +5,18 @@ import { useAlertMessageStore } from "@/alert-message/store";
 
 import {
   Button,
-  Label,
-  Input,
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
   DialogDescription,
-  DialogFooter,
 } from "@/common/components/ui";
+import { SubjectForm } from "./SubjectForm";
 
 import { postSubject } from "../services";
 
-import { ICreateSubject } from "../interfaces";
+import { validateCreateSubjectSchema } from "../schemas/subject.schemas";
 
 export function CreateSubjectDialog() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -28,9 +26,23 @@ export function CreateSubjectDialog() {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const data = Object.fromEntries(new FormData(event.currentTarget));
+    const formData = Object.fromEntries(new FormData(event.currentTarget));
 
-    const message = await postSubject(data as unknown as ICreateSubject);
+    const { data, error } = validateCreateSubjectSchema(formData);
+
+    if (error || !data) {
+      setIsOpen(false);
+
+      showAlert({
+        title: "Error",
+        message: error?.errors[0].message,
+        variant: "destructive",
+      });
+
+      return;
+    }
+
+    const message = await postSubject(data);
 
     setIsOpen(false);
 
@@ -60,32 +72,7 @@ export function CreateSubjectDialog() {
           <DialogTitle>Create Subject</DialogTitle>
           <DialogDescription>Create a new subject</DialogDescription>
         </DialogHeader>
-        <form onSubmit={handleSubmit}>
-          <div className="mb-2">
-            <Label htmlFor="subjectName" className="text-md">
-              Subject Name
-            </Label>
-            <Input
-              name="subjectName"
-              placeholder="Subject Name"
-              id="subjectName"
-            />
-          </div>
-          <div className="my-2">
-            <Label htmlFor="color" className="text-md">
-              Color
-            </Label>
-            <input
-              type="color"
-              name="color"
-              className="h-10 border bg-primary border-primary"
-              id="color"
-            />
-          </div>
-          <DialogFooter className="mt-4">
-            <Button type="submit">Submit</Button>
-          </DialogFooter>
-        </form>
+        <SubjectForm handleSubmit={handleSubmit} />
       </DialogContent>
     </Dialog>
   );
