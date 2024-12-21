@@ -7,6 +7,7 @@ import {
   CardDescription,
   CardFooter,
 } from "@/common/components/ui";
+import { EditSubjectDialog } from "./EditSubjectDialog";
 
 import { ISubject } from "../interfaces";
 
@@ -29,14 +30,15 @@ interface Props {
 export function Subject({ subject }: Props) {
   return (
     <Card className="border-t-4" style={{ borderTopColor: subject.color }}>
-      <CardHeader>
+      <CardHeader className="grid grid-cols-2">
         <CardTitle className="text-2xl">{subject.subjectName}</CardTitle>
-        <CardDescription>
-          <span>
+        <EditSubjectDialog subject={subject} />
+        <CardDescription className="flex gap-2">
+          <span className="flex gap-1">
             Notes: <strong>{subject.notes.length}</strong>
-          </span>{" "}
-          <strong>·</strong>{" "}
-          <span>
+          </span>
+          <strong>·</strong>
+          <span className="flex gap-1">
             Flashcards: <strong>{subject.flashcards.length}</strong>
           </span>
         </CardDescription>
