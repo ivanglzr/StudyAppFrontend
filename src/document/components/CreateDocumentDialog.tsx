@@ -61,9 +61,11 @@ export function CreateDocumentDialog({ subjectId }: Props) {
           <DialogDescription>Create a new flashcard</DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit} encType="multipart/form-data">
-          <div>
-            <Label htmlFor="file">File</Label>
-            <Input
+          <div className="flex flex-col">
+            <Label htmlFor="file" className="text-xl">
+              File
+            </Label>
+            <input
               type="file"
               name="file"
               id="file"
