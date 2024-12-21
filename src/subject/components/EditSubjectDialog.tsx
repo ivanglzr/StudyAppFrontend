@@ -16,7 +16,7 @@ import { Edit } from "lucide-react";
 
 import { putSubject } from "../services";
 
-import { validateEditSubjectSchema } from "../schemas/subject.schemas";
+import { validateEditSubjectSchema } from "../schemas";
 
 import { ISubject } from "../interfaces";
 

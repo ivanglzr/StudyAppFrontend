@@ -16,7 +16,7 @@ import { SubjectForm } from ".";
 
 import { postSubject } from "../services";
 
-import { validateCreateSubjectSchema } from "../schemas/subject.schemas";
+import { validateCreateSubjectSchema } from "../schemas";
 
 export function CreateSubjectDialog() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
