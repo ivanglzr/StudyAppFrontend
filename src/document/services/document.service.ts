@@ -60,3 +60,26 @@ export async function postDocument(subjectId: string, file: File) {
     await handleErrors(error);
   }
 }
+
+export async function deleteDocument(subjectId: string, filename: string) {
+  const token = await getAccessToken({ redirectToLogin: true });
+
+  try {
+    const petition = await fetch(
+      DOCUMENT_ROUTES.DELETE_DOCUMENT(subjectId, filename),
+      {
+        method: "DELETE",
+        headers: getCookieHeader(token),
+      }
+    );
+    const res = await petition.json();
+
+    validateResponse(res);
+
+    revalidatePath(ROUTES.SUBJECT_PAGE(subjectId));
+
+    return res.message;
+  } catch (error) {
+    await handleErrors(error);
+  }
+}

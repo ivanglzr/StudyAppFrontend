@@ -7,4 +7,6 @@ export const DOCUMENT_ROUTES = {
     `${BACKEND_URL}/user/subject/${subjectId}/document/${filename}`,
   POST_DOCUMENT: (subjectId: string) =>
     `${BACKEND_URL}/user/subject/${subjectId}/document`,
+  DELETE_DOCUMENT: (subjectId: string, filename: string) =>
+    `${BACKEND_URL}/user/subject/${subjectId}/document/${filename}`,
 };
