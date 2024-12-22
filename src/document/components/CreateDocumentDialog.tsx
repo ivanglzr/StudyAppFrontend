@@ -22,7 +22,7 @@ interface Props {
   subjectId: string;
 }
 
-export function UploadDocumentDialog({ subjectId }: Props) {
+export function CreateDocumentDialog({ subjectId }: Props) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [file, setFile] = useState<File>();
 
