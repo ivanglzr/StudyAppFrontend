@@ -1,4 +1,4 @@
-import { CreateDocumentDialog, DocumentItem } from ".";
+import { UploadDocumentDialog, DocumentItem } from ".";
 
 interface Props {
   documents: string[];
@@ -10,7 +10,7 @@ export function DocumentsList({ documents, subjectId }: Props) {
     <div className="mt-4 pt-2 border-t-2 border-t-background">
       <header className="flex justify-between">
         <h2 className="mb-2 text-2xl">Documents</h2>
-        <CreateDocumentDialog subjectId={subjectId} />
+        <UploadDocumentDialog subjectId={subjectId} />
       </header>
       <ul>
         {documents.map((document) => (
