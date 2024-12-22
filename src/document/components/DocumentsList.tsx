@@ -1,17 +1,8 @@
-import Link from "next/link";
-
-import { extname } from "node:path";
-
-import { CreateDocumentDialog, Icon } from ".";
+import { CreateDocumentDialog, DocumentItem } from ".";
 
 interface Props {
   documents: string[];
   subjectId: string;
-}
-
-function getStringBeforeDash(input: string) {
-  const match = input.match(/^(.*?)-\d+\./);
-  return match ? match[1] : null;
 }
 
 export function DocumentsList({ documents, subjectId }: Props) {
@@ -23,15 +14,11 @@ export function DocumentsList({ documents, subjectId }: Props) {
       </header>
       <ul>
         {documents.map((document) => (
-          <li key={document}>
-            <Link
-              href={`/user/library/${subjectId}/document/${document}`}
-              className="flex items-center gap-2"
-            >
-              <Icon ext={extname(document)} width={50} height={50} />
-              <span className="text-lg">{getStringBeforeDash(document)}</span>
-            </Link>
-          </li>
+          <DocumentItem
+            key={document}
+            document={document}
+            subjectId={subjectId}
+          />
         ))}
         {documents.length === 0 && <span>You don't have any documents</span>}
       </ul>
