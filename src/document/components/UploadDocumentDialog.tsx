@@ -12,7 +12,6 @@ import {
   DialogDescription,
   Button,
   DialogFooter,
-  Input,
   Label,
 } from "@/common/components/ui";
 
@@ -22,7 +21,7 @@ interface Props {
   subjectId: string;
 }
 
-export function CreateDocumentDialog({ subjectId }: Props) {
+export function UploadDocumentDialog({ subjectId }: Props) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [file, setFile] = useState<File>();
 
