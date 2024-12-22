@@ -6,6 +6,8 @@ export const ROUTES = {
   HOME: "/user/home",
   LIBRARY: "/user/library",
   SUBJECT_PAGE: (subjectId: string) => `/user/library/${subjectId}`,
+  DOCUMENT_PAGE: (subjectId: string, filename: string) =>
+    `/user/library/${subjectId}/document/${filename}`,
   PROFILE: "/user/profile",
 };
 
