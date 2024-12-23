@@ -9,6 +9,10 @@ export const ROUTES = {
   DOCUMENT_PAGE: (subjectId: string, filename: string) =>
     `/user/library/${subjectId}/document/${filename}`,
   PROFILE: "/user/profile",
+  CREATE_DOCUMENT_PAGE: (subjectId: string) =>
+    `/user/library/${subjectId}/note`,
+  EDIT_DOCUMENT_PAGE: (subjectId: string, noteId: string) =>
+    `/user/library/${subjectId}/note/${noteId}`,
 };
 
 export const accessTokenCookieName = "access_token";
