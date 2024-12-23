@@ -12,7 +12,9 @@ import { validateFlashcardSchema } from "../schemas";
 
 import { postFlashcard, putFlashcard } from "../services";
 
-import { IFlashcard } from "../interfaces";
+import { ICreateFlashcard, IFlashcard } from "../interfaces";
+import { ErrorSpan, FormGroup } from "@/common/components/forms";
+import { useValidationErrors } from "@/common/hooks";
 
 interface Props {
   initialFlashcard?: IFlashcard;
@@ -39,17 +41,21 @@ export function FlashcardForm({
 
   const showAlert = useAlertMessageStore((state) => state.showAlert);
 
+  const { errorMessages, updateErrorMessages } =
+    useValidationErrors<ICreateFlashcard>({
+      title: "",
+      answers: [],
+      tags: [],
+      learned: false,
+    });
+
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const { data, error } = validateFlashcardSchema(flashcard);
 
     if (error) {
-      showAlert({
-        title: "Error",
-        message: error.errors[0].message,
-        variant: "destructive",
-      });
+      updateErrorMessages(error);
 
       return;
     }
@@ -90,6 +96,7 @@ export function FlashcardForm({
           value={flashcard.title}
           onChange={(e) => setTitle(e.target.value)}
         />
+        <ErrorSpan error={errorMessages.title} />
       </div>
       <div>
         <Label htmlFor="answer" className="text-md">
@@ -102,6 +109,7 @@ export function FlashcardForm({
           value={flashcard.answers[flashcard.answers.length - 1] ?? ""}
           onChange={(e) => setLastAnswer(e.target.value)}
         />
+        <ErrorSpan error={errorMessages.answers} />
         <Button
           type="button"
           onClick={addNewAnswer}
@@ -141,6 +149,7 @@ export function FlashcardForm({
           value={flashcard.tags[flashcard.tags.length - 1] ?? ""}
           onChange={(e) => setLastTag(e.target.value)}
         />
+        <ErrorSpan error={errorMessages.tags} />
         <Button
           type="button"
           onClick={addNewTag}
@@ -181,6 +190,7 @@ export function FlashcardForm({
           checked={flashcard.learned}
           onChange={(e) => setLearned(e.target.checked)}
         />
+        <ErrorSpan error={errorMessages.learned} />
       </div>
       <DialogFooter className="mt-4">
         <Button type="submit">Submit</Button>
