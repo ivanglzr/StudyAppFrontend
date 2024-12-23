@@ -40,3 +40,34 @@ export async function postFlashcard(
     await handleErrors(error);
   }
 }
+
+export async function putFlashcard(
+  subjectId: string,
+  flashcardId: string,
+  flashcard: ICreateFlashcard
+) {
+  const token = await getAccessToken({ redirectToLogin: true });
+
+  try {
+    const petition = await fetch(
+      FLASHCARD_ROUTES.PUT_FLASHCARD(subjectId, flashcardId),
+      {
+        method: "PUT",
+        headers: {
+          ...getCookieHeader(token),
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(flashcard),
+      }
+    );
+    const res = await petition.json();
+
+    validateResponse(res);
+
+    revalidatePath(ROUTES.SUBJECT_PAGE(subjectId));
+
+    return res.message;
+  } catch (error) {
+    await handleErrors(error);
+  }
+}
