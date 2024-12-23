@@ -1,7 +1,7 @@
 import { Header } from "@/common/components/header";
 import { DocumentsList } from "@/document/components";
 import { FlashcardsCarousel } from "@/flashcard/components";
-import { CreateFlashcardDialog } from "@/flashcard/components";
+import { FlashcardDialog } from "@/flashcard/components";
 
 import { getSubject } from "@/subject/services";
 
@@ -20,9 +20,12 @@ export default async function SubjectPage({ params }: Props) {
     <>
       <Header>
         <h1>{subject.subjectName}</h1>{" "}
-        <CreateFlashcardDialog subjectId={subject._id} />
+        <FlashcardDialog subjectId={subject._id} />
       </Header>
-      <FlashcardsCarousel flashcards={subject.flashcards} />
+      <FlashcardsCarousel
+        flashcards={subject.flashcards}
+        subjectId={subjectId}
+      />
       <DocumentsList documents={subject.documents} subjectId={subjectId} />
     </>
   );

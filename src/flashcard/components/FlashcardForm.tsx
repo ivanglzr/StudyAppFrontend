@@ -1,23 +1,30 @@
 "use client";
 
-import { Dispatch, FormEvent, SetStateAction } from "react";
+import { FormEvent } from "react";
 
-import { useAlertMessageStore } from "@/alert-message/store";
 import { useFlashcardReducer } from "../hooks";
+import { useAlertMessageStore } from "@/alert-message/store";
 
 import { Label, Input, Button, DialogFooter } from "@/common/components/ui";
 import { Trash } from "lucide-react";
 
-import { postFlashcard } from "../services";
-
 import { validateFlashcardSchema } from "../schemas";
 
+import { postFlashcard, putFlashcard } from "../services";
+
+import { IFlashcard } from "../interfaces";
+
 interface Props {
+  initialFlashcard?: IFlashcard;
   subjectId: string;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  setIsOpen: (isOpen: boolean) => void;
 }
 
-export function CreateFlashcardForm({ subjectId, setIsOpen }: Props) {
+export function FlashcardForm({
+  initialFlashcard,
+  subjectId,
+  setIsOpen,
+}: Props) {
   const {
     state: flashcard,
     setTitle,
@@ -28,7 +35,7 @@ export function CreateFlashcardForm({ subjectId, setIsOpen }: Props) {
     addNewTag,
     deleteAnswer,
     deleteTag,
-  } = useFlashcardReducer();
+  } = useFlashcardReducer(initialFlashcard);
 
   const showAlert = useAlertMessageStore((state) => state.showAlert);
 
@@ -47,7 +54,10 @@ export function CreateFlashcardForm({ subjectId, setIsOpen }: Props) {
       return;
     }
 
-    const message = await postFlashcard(subjectId, data);
+    const message =
+      initialFlashcard === undefined
+        ? await postFlashcard(subjectId, data)
+        : await putFlashcard(subjectId, initialFlashcard._id, flashcard);
 
     setIsOpen(false);
 
