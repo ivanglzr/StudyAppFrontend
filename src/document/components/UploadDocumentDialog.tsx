@@ -17,6 +17,8 @@ import {
 
 import { postDocument } from "../services";
 
+import { documentMaxSize } from "../config";
+
 interface Props {
   subjectId: string;
 }
@@ -33,6 +35,17 @@ export function UploadDocumentDialog({ subjectId }: Props) {
     if (!files) return;
 
     const [newFile] = files;
+
+    if (newFile.size >= documentMaxSize) {
+      showAlert({
+        title: "Error",
+        message: "The file size is too large",
+        variant: "destructive",
+      });
+      setIsOpen(false);
+
+      return;
+    }
 
     setFile(newFile);
   };
