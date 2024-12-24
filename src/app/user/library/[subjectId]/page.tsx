@@ -2,6 +2,7 @@ import { Header } from "@/common/components/header";
 import { DocumentsList } from "@/document/components";
 import { FlashcardsCarousel } from "@/flashcard/components";
 import { FlashcardDialog } from "@/flashcard/components";
+import { NotesList } from "@/note/components";
 
 import { getSubject } from "@/subject/services";
 
@@ -27,6 +28,7 @@ export default async function SubjectPage({ params }: Props) {
         subjectId={subjectId}
       />
       <DocumentsList documents={subject.documents} subjectId={subjectId} />
+      <NotesList notes={subject.notes} subjectId={subjectId} />
     </>
   );
 }
