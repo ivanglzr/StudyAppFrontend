@@ -7,7 +7,7 @@ import { NotesList } from "@/note/components";
 import { getSubject } from "@/subject/services";
 
 interface Props {
-  params: { subjectId: string };
+  params: Promise<{ subjectId: string }>;
 }
 
 export default async function SubjectPage({ params }: Props) {

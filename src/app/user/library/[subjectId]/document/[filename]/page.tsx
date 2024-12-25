@@ -1,10 +1,10 @@
 import { DOCUMENT_ROUTES } from "@/document/services";
 
 interface Props {
-  params: {
+  params: Promise<{
     filename: string;
     subjectId: string;
-  };
+  }>;
 }
 
 export default async function DocumentPage({ params }: Props) {

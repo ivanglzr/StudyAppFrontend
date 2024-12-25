@@ -1,11 +1,11 @@
 import { Header } from "@/common/components/header";
 import { DynamicNoteEditor } from "@/note/components";
 
-export default async function CreateNotePage({
-  params,
-}: {
+interface Props {
   params: Promise<{ subjectId: string }>;
-}) {
+}
+
+export default async function CreateNotePage({ params }: Props) {
   const { subjectId } = await params;
 
   return (
