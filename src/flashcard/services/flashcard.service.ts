@@ -71,3 +71,26 @@ export async function putFlashcard(
     await handleErrors(error);
   }
 }
+
+export async function deleteFlashcard(subjectId: string, flashcardId: string) {
+  const token = await getAccessToken({ redirectToLogin: true });
+
+  try {
+    const petition = await fetch(
+      FLASHCARD_ROUTES.DELETE_FLASHCARD(subjectId, flashcardId),
+      {
+        method: "DELETE",
+        headers: getCookieHeader(token),
+      }
+    );
+    const res = await petition.json();
+
+    validateResponse(res);
+
+    revalidatePath(ROUTES.SUBJECT_PAGE(subjectId));
+
+    return res.message;
+  } catch (error) {
+    await handleErrors(error);
+  }
+}
