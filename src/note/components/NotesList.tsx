@@ -22,7 +22,7 @@ export function NotesList({ notes, subjectId }: Props) {
       </header>
       <ul>
         {notes.map((note) => (
-          <NoteItem note={note} subjectId={subjectId} />
+          <NoteItem note={note} subjectId={subjectId} key={note._id} />
         ))}
       </ul>
     </div>
