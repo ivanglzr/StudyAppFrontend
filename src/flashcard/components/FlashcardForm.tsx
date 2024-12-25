@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent } from "react";
+import { FormEvent, MouseEvent } from "react";
 
 import { useFlashcardReducer } from "../hooks";
 import { useAlertMessageStore } from "@/alert-message/store";
@@ -10,7 +10,7 @@ import { Trash } from "lucide-react";
 
 import { validateFlashcardSchema } from "../schemas";
 
-import { postFlashcard, putFlashcard } from "../services";
+import { deleteFlashcard, postFlashcard, putFlashcard } from "../services";
 
 import { ICreateFlashcard, IFlashcard } from "../interfaces";
 import { ErrorSpan, FormGroup } from "@/common/components/forms";
@@ -39,6 +39,8 @@ export function FlashcardForm({
     deleteTag,
   } = useFlashcardReducer(initialFlashcard);
 
+  const isEditFlashcard = initialFlashcard !== undefined;
+
   const showAlert = useAlertMessageStore((state) => state.showAlert);
 
   const { errorMessages, updateErrorMessages } =
@@ -48,6 +50,20 @@ export function FlashcardForm({
       tags: [],
       learned: false,
     });
+
+  const handleDelete = async (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+
+    const message = await deleteFlashcard(subjectId, initialFlashcard!._id);
+
+    setIsOpen(false);
+
+    showAlert({
+      title: "Success",
+      message,
+      variant: "default",
+    });
+  };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -60,10 +76,9 @@ export function FlashcardForm({
       return;
     }
 
-    const message =
-      initialFlashcard === undefined
-        ? await postFlashcard(subjectId, data)
-        : await putFlashcard(subjectId, initialFlashcard._id, flashcard);
+    const message = isEditFlashcard
+      ? await putFlashcard(subjectId, initialFlashcard._id, flashcard)
+      : await postFlashcard(subjectId, data);
 
     setIsOpen(false);
 
@@ -193,6 +208,16 @@ export function FlashcardForm({
         <ErrorSpan error={errorMessages.learned} />
       </div>
       <DialogFooter className="mt-4">
+        {isEditFlashcard && (
+          <Button
+            type="button"
+            variant="destructive"
+            className="mr-auto"
+            onClick={handleDelete}
+          >
+            Delete
+          </Button>
+        )}
         <Button type="submit">Submit</Button>
       </DialogFooter>
     </form>
