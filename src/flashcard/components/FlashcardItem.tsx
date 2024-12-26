@@ -14,11 +14,11 @@ export function FlashcardItem({ flashcard, subjectId }: Props) {
     <Card
       className={`relative border-2 border-dashed ${flashcard.learned ? "border-green-500" : "border-red-500"}`}
     >
-      <CardContent className="h-36 lg:h-60 flex flex-col justify-center text-center">
-        <h3 className="text-2xl">{flashcard.title}</h3>
+      <CardContent className="sm:h-36 lg:h-60 mt-4 sm:mt-0 flex flex-col justify-center text-center">
+        <h3 className="text-lg sm:text-2xl">{flashcard.title}</h3>
       </CardContent>
-      <CardFooter className="flex flex-col items-start">
-        <h4 className="font-bold">Answer</h4>
+      <CardFooter className="flex flex-col items-start p-2 sm:p-6">
+        <h4 className="font-bold text-sm sm:text-md">Answer</h4>
         <AnswerSpoiler answers={flashcard.answers} />
       </CardFooter>
       <FlashcardDialog subjectId={subjectId} flashcard={flashcard} />
