@@ -26,21 +26,19 @@ export function ThemeManager() {
         {themeColors.map((themeColor, index) => (
           <button
             key={index}
+            aria-label="Button to change the page's primary color"
             className="w-6 h-6 border-2 border-foreground rounded-sm"
             style={{ backgroundColor: themeColor ?? "hsl(var(--foreground))" }}
             onClick={() => setColorTheme(themeColor)}
           />
         ))}
       </div>
-      {theme.darkMode ? (
-        <button onClick={toggleDarkMode}>
-          <Moon {...iconProps} />
-        </button>
-      ) : (
-        <button onClick={toggleDarkMode}>
-          <Sun {...iconProps} />
-        </button>
-      )}
+      <button
+        onClick={toggleDarkMode}
+        aria-label="Button to toggle the page's dark mode"
+      >
+        {theme.darkMode ? <Moon {...iconProps} /> : <Sun {...iconProps} />}
+      </button>
     </div>
   );
 }

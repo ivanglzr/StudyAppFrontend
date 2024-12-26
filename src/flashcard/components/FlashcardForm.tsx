@@ -13,7 +13,7 @@ import { validateFlashcardSchema } from "../schemas";
 import { deleteFlashcard, postFlashcard, putFlashcard } from "../services";
 
 import { ICreateFlashcard, IFlashcard } from "../interfaces";
-import { ErrorSpan, FormGroup } from "@/common/components/forms";
+import { ErrorSpan } from "@/common/components/forms";
 import { useValidationErrors } from "@/common/hooks";
 
 interface Props {

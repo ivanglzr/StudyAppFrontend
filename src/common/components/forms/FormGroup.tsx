@@ -10,6 +10,7 @@ interface Props {
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   value: string | readonly string[] | number | undefined;
   errorMessage: string | null;
+  autoComplete?: string;
 }
 
 export function FormGroup({
@@ -20,6 +21,7 @@ export function FormGroup({
   handleChange,
   value,
   errorMessage,
+  autoComplete,
 }: Props) {
   return (
     <div className="w-full mt-4">
@@ -33,6 +35,7 @@ export function FormGroup({
         placeholder={placeholder}
         onChange={handleChange}
         value={value}
+        autoComplete={autoComplete}
       />
       <ErrorSpan error={errorMessage} />
     </div>

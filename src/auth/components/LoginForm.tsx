@@ -74,6 +74,7 @@ export function LoginForm() {
         handleChange={handleChange}
         value={loginData.email}
         errorMessage={errorMessages.email}
+        autoComplete="email"
       />
       <FormGroup
         type="password"
@@ -83,6 +84,7 @@ export function LoginForm() {
         handleChange={handleChange}
         value={loginData.password}
         errorMessage={errorMessages.password}
+        autoComplete="current-password"
       />
     </Form>
   );

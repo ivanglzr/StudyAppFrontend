@@ -16,6 +16,7 @@ export function NoteItem({ note, subjectId }: Props) {
       <Link
         href={ROUTES.EDIT_NOTE_PAGE(subjectId, note._id)}
         className="flex items-center gap-1"
+        aria-label="Link to an especific note"
       >
         <DefaultIcon className="hidden sm:inline-block w-12 h-12" />
         <div>

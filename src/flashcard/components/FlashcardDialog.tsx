@@ -28,9 +28,13 @@ export function FlashcardDialog({ subjectId, flashcard }: Props) {
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger asChild>
+      <DialogTrigger asChild title="Trigger flashcard dialog">
         {isEditFlashcard ? (
-          <button className="absolute top-0 right-0 m-2">
+          <button
+            role="button"
+            aria-label="Button to edit an especific flashcard"
+            className="absolute top-0 right-0 m-2"
+          >
             <Edit />
           </button>
         ) : (

@@ -76,6 +76,7 @@ export function RegisterForm() {
         handleChange={handleChange}
         value={registerData.fullname}
         errorMessage={errorMessages.fullname}
+        autoComplete="name"
       />
       <FormGroup
         type="email"
@@ -85,6 +86,7 @@ export function RegisterForm() {
         handleChange={handleChange}
         value={registerData.email}
         errorMessage={errorMessages.email}
+        autoComplete="email"
       />
       <FormGroup
         type="password"
@@ -94,6 +96,7 @@ export function RegisterForm() {
         handleChange={handleChange}
         value={registerData.password}
         errorMessage={errorMessages.password}
+        autoComplete="current-password"
       />
     </Form>
   );
