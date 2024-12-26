@@ -33,7 +33,7 @@ export function Subject({ subject }: Props) {
       <CardHeader className="grid grid-cols-2">
         <CardTitle className="text-2xl">{subject.subjectName}</CardTitle>
         <EditSubjectDialog subject={subject} />
-        <CardDescription className="flex gap-2">
+        <CardDescription className="gap-2 hidden sm:flex">
           <span className="flex gap-1">
             Notes: <strong>{subject.notes.length}</strong>
           </span>
