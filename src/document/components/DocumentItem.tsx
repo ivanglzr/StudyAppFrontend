@@ -41,10 +41,12 @@ export function DocumentItem({ document, subjectId }: Props) {
         href={ROUTES.DOCUMENT_PAGE(subjectId, document)}
         className="flex items-center gap-2"
       >
-        <Icon ext={extname(document)} width={50} height={50} />
-        <span className="text-lg">{getStringBeforeDash(document)}</span>
+        <Icon ext={extname(document)} className="w-8 h-8 sm:w-12 sm:h-12" />
+        <span className="max-w-28 overflow-hidden sm:max-w-max text-sm sm:truncate sm:text-lg">
+          {getStringBeforeDash(document)}
+        </span>
       </Link>
-      <button className="mr-16" onClick={deleteDoc}>
+      <button className="mr-3 sm:mr-16" onClick={deleteDoc}>
         <Trash2 />
       </button>
     </li>
