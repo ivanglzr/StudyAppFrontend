@@ -14,6 +14,7 @@ import {
   DialogFooter,
   Label,
 } from "@/common/components/ui";
+import { AddButton } from "@/common/components/buttons";
 
 import { postDocument } from "../services";
 
@@ -32,7 +33,7 @@ export function UploadDocumentDialog({ subjectId }: Props) {
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
 
-    if (!files) return;
+    if (!files || files.length === 0) return;
 
     const [newFile] = files;
 
@@ -65,7 +66,7 @@ export function UploadDocumentDialog({ subjectId }: Props) {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button className="ml-auto">Upload document</Button>
+        <AddButton text="Upload Document" />
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -74,10 +75,15 @@ export function UploadDocumentDialog({ subjectId }: Props) {
         </DialogHeader>
         <form onSubmit={handleSubmit} encType="multipart/form-data">
           <div className="flex flex-col">
-            <Label htmlFor="file" className="text-xl">
-              File
+            <Label
+              htmlFor="file"
+              className="text-lg sm:text-xl rounded-lg border border-primary px-2 py-1"
+            >
+              Upload here your document
             </Label>
+            <span className="mt-2">{file?.name}</span>
             <input
+              className="hidden"
               type="file"
               name="file"
               id="file"
