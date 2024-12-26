@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { Button } from "@/common/components/ui";
 import { NoteItem } from ".";
+import { AddButton } from "@/common/components/buttons";
 
 import { INote } from "../interfaces";
 
@@ -17,7 +17,7 @@ export function NotesList({ notes, subjectId }: Props) {
       <header className="flex justify-between">
         <h2 className="mb-2 text-2xl">Notes</h2>
         <Link href={ROUTES.CREATE_NOTE_PAGE(subjectId)}>
-          <Button>Create a Note</Button>
+          <AddButton text="Add Note" />
         </Link>
       </header>
       <ul>

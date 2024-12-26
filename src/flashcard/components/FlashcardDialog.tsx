@@ -2,8 +2,6 @@
 
 import { useState } from "react";
 
-import { Button } from "@/common/components/ui";
-
 import {
   Dialog,
   DialogContent,
@@ -13,9 +11,10 @@ import {
   DialogDescription,
 } from "@/common/components/ui";
 import { FlashcardForm } from ".";
+import { AddButton } from "@/common/components/buttons";
+import { Edit } from "lucide-react";
 
 import { IFlashcard } from "../interfaces";
-import { Edit } from "lucide-react";
 
 interface Props {
   subjectId: string;
@@ -35,7 +34,7 @@ export function FlashcardDialog({ subjectId, flashcard }: Props) {
             <Edit />
           </button>
         ) : (
-          <Button className="ml-auto">Create Flashcard</Button>
+          <AddButton text="Create Flashcard" />
         )}
       </DialogTrigger>
       <DialogContent>

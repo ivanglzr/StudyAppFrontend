@@ -4,7 +4,6 @@ import { FormEvent, useState } from "react";
 import { useAlertMessageStore } from "@/alert-message/store";
 
 import {
-  Button,
   Dialog,
   DialogContent,
   DialogHeader,
@@ -13,6 +12,7 @@ import {
   DialogDescription,
 } from "@/common/components/ui";
 import { SubjectForm } from ".";
+import { AddButton } from "@/common/components/buttons";
 
 import { postSubject } from "../services";
 
@@ -65,7 +65,7 @@ export function CreateSubjectDialog() {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button className="ml-auto">Create subject</Button>
+        <AddButton text="Create Subject" />
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
