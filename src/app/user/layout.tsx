@@ -8,7 +8,7 @@ export default function HomeLayout({
   return (
     <div className="min-h-screen grid grid-cols-1">
       <SideBar />
-      <main className="bg-muted m-4 p-2 ml-24 rounded-lg overflow-x-hidden">
+      <main className="bg-muted m-4 p-2 ml-20 sm:ml-24 rounded-lg overflow-x-hidden">
         {children}
       </main>
     </div>

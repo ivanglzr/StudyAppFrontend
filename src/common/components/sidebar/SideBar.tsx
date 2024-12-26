@@ -10,7 +10,7 @@ import { LinkIcon } from "./LinkIcon";
 import { ROUTES } from "@/config";
 
 const iconProps = {
-  size: 30,
+  className: "h-6 sm:h-10 w-6 sm:w-8",
   strokeWidth: 1.5,
 };
 
@@ -42,7 +42,7 @@ export function SideBar() {
   const pathname = usePathname();
 
   return (
-    <aside className="bg-muted fixed w-20 h-full">
+    <aside className="bg-muted fixed w-16 sm:w-20 h-full">
       <ul className="h-full flex flex-col items-center mt-1">
         {links.map(({ text, icon, href }) => (
           <li key={text} className="w-full px-2 mt-1">
@@ -54,7 +54,7 @@ export function SideBar() {
             />
           </li>
         ))}
-        <li className="w-full mt-auto mb-6 px-2">
+        <li className="w-full mt-auto mb-2">
           <LogOutButton iconProps={iconProps} />
         </li>
       </ul>

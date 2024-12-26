@@ -22,7 +22,9 @@ export function LinkIcon({ icon, href, text, isActive }: Props) {
       }`}
     >
       <div className="rounded-lg">{icon(iconColor)}</div>
-      <span className={`text-sm opacity-90 whitespace-nowrap ${textColor}`}>
+      <span
+        className={`text-xs sm:text-sm opacity-90 whitespace-nowrap ${textColor}`}
+      >
         {text}
       </span>
     </Link>
