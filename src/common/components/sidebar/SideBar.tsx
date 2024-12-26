@@ -10,7 +10,7 @@ import { LinkIcon } from "./LinkIcon";
 import { ROUTES } from "@/config";
 
 const iconProps = {
-  className: "h-6 sm:h-10 w-6 sm:w-8",
+  className: "h-6 sm:h-8 w-6 sm:w-8",
   strokeWidth: 1.5,
 };
 
