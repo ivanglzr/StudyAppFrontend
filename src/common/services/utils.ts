@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { isRedirectError } from "next/dist/client/components/redirect";
+import { isRedirectError } from "next/dist/client/components/redirect-error";
 
 import { UnauthorizedError } from "@/auth/errors";
 
