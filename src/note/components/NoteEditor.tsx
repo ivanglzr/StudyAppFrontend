@@ -73,7 +73,7 @@ export default function NoteEditor({ subjectId, noteId, initialNote }: Props) {
         name="title"
         id="title"
         placeholder="Title"
-        className="w-1/5 mb-2 border border-primary"
+        className="max-w-80 mb-2 border border-primary"
         onChange={(event) => setTitle(event.target.value)}
         value={title}
       />
