@@ -35,6 +35,8 @@ export function DocumentItem({ document, subjectId }: Props) {
     });
   };
 
+  const documentName = getStringBeforeDash(document);
+
   return (
     <li key={document} className="flex justify-between">
       <Link
@@ -42,8 +44,11 @@ export function DocumentItem({ document, subjectId }: Props) {
         className="flex items-center gap-2"
       >
         <Icon ext={extname(document)} className="w-8 h-8 sm:w-12 sm:h-12" />
-        <span className="max-w-28 overflow-hidden sm:max-w-max text-sm sm:truncate sm:text-lg">
-          {getStringBeforeDash(document)}
+        <span className="text-lg hidden lg:block">
+          {documentName?.substring(0, 83)}
+        </span>
+        <span className="block lg:hidden text-xs sm:text-lg">
+          {documentName?.substring(0, 38)}
         </span>
       </Link>
       <button className="mr-3 sm:mr-16" onClick={deleteDoc}>
