@@ -87,3 +87,23 @@ export async function putNote(
     await handleErrors(error, ROUTES.SUBJECT_PAGE(subjectId));
   }
 }
+
+export async function deleteNote(subjectId: string, noteId: string) {
+  const token = await getAccessToken({ redirectToLogin: true });
+
+  try {
+    const petition = await fetch(NOTE_ROUTES.DELETE_NOTE(subjectId, noteId), {
+      method: "DELETE",
+      headers: getCookieHeader(token),
+    });
+    const res = await petition.json();
+
+    validateResponse(res);
+
+    revalidatePath(ROUTES.SUBJECT_PAGE(subjectId));
+
+    return res.message;
+  } catch (error) {
+    await handleErrors(error);
+  }
+}

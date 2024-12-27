@@ -1,5 +1,13 @@
+"use client";
+
 import Link from "next/link";
 import { Default as DefaultIcon } from "@/document/components";
+
+import { useAlertMessageStore } from "@/alert-message/store";
+
+import { Trash2 } from "lucide-react";
+
+import { deleteNote } from "../services";
 
 import { INote } from "../interfaces";
 
@@ -11,8 +19,20 @@ interface Props {
 }
 
 export function NoteItem({ note, subjectId }: Props) {
+  const showAlert = useAlertMessageStore((state) => state.showAlert);
+
+  const handleDelete = async () => {
+    const message = await deleteNote(subjectId, note._id);
+
+    showAlert({
+      title: "Success",
+      message,
+      variant: "default",
+    });
+  };
+
   return (
-    <li key={note._id} className="mb-1">
+    <li key={note._id} className="flex justify-between mb-1">
       <Link
         href={ROUTES.EDIT_NOTE_PAGE(subjectId, note._id)}
         className="flex items-center gap-1"
@@ -28,6 +48,9 @@ export function NoteItem({ note, subjectId }: Props) {
           </p>
         </div>
       </Link>
+      <button onClick={handleDelete} className="mr-3 sm:mr-16">
+        <Trash2 />
+      </button>
     </li>
   );
 }
